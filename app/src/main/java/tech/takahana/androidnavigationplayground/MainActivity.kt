@@ -1,5 +1,5 @@
 package tech.takahana.androidnavigationplayground
 
-import androidx.fragment.app.FragmentActivity
+import androidx.appcompat.app.AppCompatActivity
 
-class MainActivity : FragmentActivity(R.layout.activity_main)
+class MainActivity : AppCompatActivity(R.layout.activity_main)
