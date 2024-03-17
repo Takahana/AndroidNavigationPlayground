@@ -53,7 +53,7 @@ internal fun HomeScreen() {
 
 @Preview
 @Composable
-internal fun MainScreenPreview() {
+internal fun HomeScreenPreview() {
     AndroidNavigationPlaygroundTheme {
         // A surface container using the 'background' color from the theme
         Surface(
