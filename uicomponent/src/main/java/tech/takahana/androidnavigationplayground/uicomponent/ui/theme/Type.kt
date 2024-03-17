@@ -1,4 +1,4 @@
-package tech.takahana.androidnavigationplayground.ui.theme
+package tech.takahana.androidnavigationplayground.uicomponent.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

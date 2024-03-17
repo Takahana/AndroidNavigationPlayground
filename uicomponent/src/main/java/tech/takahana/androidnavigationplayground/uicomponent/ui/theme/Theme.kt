@@ -1,4 +1,4 @@
-package tech.takahana.androidnavigationplayground.ui.theme
+package tech.takahana.androidnavigationplayground.uicomponent.ui.theme
 
 import android.app.Activity
 import android.os.Build
