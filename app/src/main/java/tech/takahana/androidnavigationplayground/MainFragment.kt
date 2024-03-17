@@ -24,7 +24,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         bottomNavigationView: BottomNavigationView,
         navController: NavController,
     ) {
-        navController.createMyAppGraph()
+        navController.createMyAppGraph(requireContext())
         bottomNavigationView.setupWithNavController(navController)
     }
 }

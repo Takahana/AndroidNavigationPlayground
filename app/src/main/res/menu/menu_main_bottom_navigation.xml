@@ -6,4 +6,10 @@
     android:title="@string/bottom_nav_home"
     android:visible="true"
     />
+  <item
+    android:id="@+id/destination_search"
+    android:icon="@android:drawable/ic_menu_search"
+    android:title="@string/bottom_nav_search"
+    android:visible="true"
+    />
 </menu>

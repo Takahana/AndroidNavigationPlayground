@@ -52,6 +52,7 @@ android {
 dependencies {
     implementation(project(":uicomponent"))
     implementation(project(":features:home"))
+    implementation(project(":features:search"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

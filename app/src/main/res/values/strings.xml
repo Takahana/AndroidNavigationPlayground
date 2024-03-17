@@ -1,4 +1,5 @@
 <resources>
   <string name="app_name">AndroidNavigationPlayground</string>
   <string name="bottom_nav_home">Home</string>
+  <string name="bottom_nav_search">Search</string>
 </resources>
