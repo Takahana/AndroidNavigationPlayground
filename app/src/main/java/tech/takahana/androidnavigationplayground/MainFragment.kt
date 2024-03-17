@@ -8,7 +8,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import tech.takahana.androidnavigationplayground.ui.navigation.createMyAppGraph
-import tech.takahana.androidnavigationplayground.ui.navigation.toRoute
+import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination
 
 class MainFragment : Fragment(R.layout.fragment_main) {
 
@@ -28,8 +28,13 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         navController.createMyAppGraph()
         bottomNavigationView.setupWithNavController(navController)
         bottomNavigationView.setOnItemSelectedListener {
+            val route = when (it.itemId) {
+                R.id.destination_home -> MyAppScreenDestination.Home
+                R.id.destination_search -> MyAppScreenDestination.Search
+                else -> return@setOnItemSelectedListener false
+            }
             try {
-                navController.navigate(it.itemId.toRoute())
+                navController.navigate(route.route())
                 true
             } catch (e: IllegalArgumentException) {
                 false
