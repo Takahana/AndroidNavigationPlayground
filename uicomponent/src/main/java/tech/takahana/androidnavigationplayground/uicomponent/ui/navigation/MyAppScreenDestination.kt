@@ -5,6 +5,6 @@ import tech.takahana.androidnavigationplayground.navigator.ScreenDestination
 sealed interface MyAppScreenDestination : ScreenDestination {
 
     data object Player : MyAppScreenDestination {
-        override val route: String = "player"
+        override val routePattern: String = "player"
     }
 }

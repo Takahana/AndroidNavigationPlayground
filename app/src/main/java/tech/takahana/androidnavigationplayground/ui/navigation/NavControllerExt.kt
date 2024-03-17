@@ -21,7 +21,7 @@ fun NavController.createMyAppGraph(
     ) {
         fragment<HomeFragment>(route = R.id.destination_home.toRoute(context))
         fragment<SearchFragment>(route = R.id.destination_search.toRoute(context))
-        activity(route = MyAppScreenDestination.Player.route) {
+        activity(route = MyAppScreenDestination.Player.routePattern) {
             this.activityClass = PlayerActivity::class
         }
     }
