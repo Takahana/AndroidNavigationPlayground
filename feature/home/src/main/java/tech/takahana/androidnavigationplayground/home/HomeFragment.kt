@@ -46,7 +46,7 @@ class HomeFragment : Fragment() {
                     ) {
                         HomeScreen(
                             onClick = {
-                                findNavController().navigate(MyAppScreenDestination.Player.routePattern)
+                                findNavController().navigate(MyAppScreenDestination.Player.route())
                             }
                         )
                     }

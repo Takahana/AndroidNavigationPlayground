@@ -6,5 +6,6 @@ sealed interface MyAppScreenDestination : ScreenDestination {
 
     data object Player : MyAppScreenDestination {
         override val routePattern: String = "player"
+        override fun route(): String = routePattern
     }
 }
