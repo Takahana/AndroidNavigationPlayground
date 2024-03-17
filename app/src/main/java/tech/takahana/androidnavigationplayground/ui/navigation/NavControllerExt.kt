@@ -4,11 +4,14 @@ import android.content.Context
 import android.content.res.Resources
 import androidx.annotation.IdRes
 import androidx.navigation.NavController
+import androidx.navigation.activity
 import androidx.navigation.createGraph
 import androidx.navigation.fragment.fragment
 import tech.takahana.androidnavigationplayground.R
 import tech.takahana.androidnavigationplayground.home.HomeFragment
+import tech.takahana.androidnavigationplayground.player.PlayerActivity
 import tech.takahana.androidnavigationplayground.search.SearchFragment
+import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination
 
 fun NavController.createMyAppGraph(
     context: Context,
@@ -18,6 +21,9 @@ fun NavController.createMyAppGraph(
     ) {
         fragment<HomeFragment>(route = R.id.destination_home.toRoute(context))
         fragment<SearchFragment>(route = R.id.destination_search.toRoute(context))
+        activity(route = MyAppScreenDestination.Player.route) {
+            this.activityClass = PlayerActivity::class
+        }
     }
 }
 
