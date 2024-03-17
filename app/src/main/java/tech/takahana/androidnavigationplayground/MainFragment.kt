@@ -8,6 +8,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import tech.takahana.androidnavigationplayground.ui.navigation.createMyAppGraph
+import tech.takahana.androidnavigationplayground.ui.navigation.toRoute
 
 class MainFragment : Fragment(R.layout.fragment_main) {
 
@@ -26,5 +27,13 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     ) {
         navController.createMyAppGraph(requireContext())
         bottomNavigationView.setupWithNavController(navController)
+        bottomNavigationView.setOnItemSelectedListener {
+            try {
+                navController.navigate(it.itemId.toRoute(requireContext()))
+                true
+            } catch (e: IllegalArgumentException) {
+                false
+            }
+        }
     }
 }

@@ -21,7 +21,7 @@ fun NavController.createMyAppGraph(
     }
 }
 
-private fun @receiver:IdRes Int.toRoute(context: Context): String {
+fun @receiver:IdRes Int.toRoute(context: Context): String {
     return try {
         context.resources.getResourceName(this)
     } catch (e: Resources.NotFoundException) {
