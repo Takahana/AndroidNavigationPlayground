@@ -1,4 +1,4 @@
-package tech.takahana.androidnavigationplayground
+package tech.takahana.androidnavigationplayground.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
