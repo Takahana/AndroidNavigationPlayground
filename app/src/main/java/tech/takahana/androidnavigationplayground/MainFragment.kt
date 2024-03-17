@@ -29,8 +29,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         bottomNavigationView.setupWithNavController(navController)
         bottomNavigationView.setOnItemSelectedListener {
             val route = when (it.itemId) {
-                R.id.destination_home -> MyAppScreenDestination.Home
-                R.id.destination_search -> MyAppScreenDestination.Search
+                R.id.menu_main_bottom_home -> MyAppScreenDestination.Home
+                R.id.menu_main_bottom_search -> MyAppScreenDestination.Search
                 else -> return@setOnItemSelectedListener false
             }
             try {

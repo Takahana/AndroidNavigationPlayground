@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
   <item
-    android:id="@+id/destination_home"
+    android:id="@+id/menu_main_bottom_home"
     android:icon="@android:drawable/ic_menu_compass"
     android:title="@string/bottom_nav_home"
     android:visible="true"
     />
   <item
-    android:id="@+id/destination_search"
+    android:id="@+id/menu_main_bottom_search"
     android:icon="@android:drawable/ic_menu_search"
     android:title="@string/bottom_nav_search"
     android:visible="true"
