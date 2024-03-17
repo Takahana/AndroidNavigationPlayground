@@ -4,11 +4,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
-import androidx.navigation.createGraph
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.fragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import tech.takahana.androidnavigationplayground.ui.navigation.createMyAppGraph
 
 class MainFragment : Fragment(R.layout.fragment_main) {
 
@@ -25,17 +24,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         bottomNavigationView: BottomNavigationView,
         navController: NavController,
     ) {
-        createNavGraph(navController)
+        navController.createMyAppGraph()
         bottomNavigationView.setupWithNavController(navController)
-    }
-
-    private fun createNavGraph(
-        navController: NavController,
-    ) {
-        navController.graph = navController.createGraph(
-            startDestination = R.id.destination_home.toString(),
-        ) {
-            fragment<HomeFragment>(route = R.id.destination_home.toString())
-        }
     }
 }
