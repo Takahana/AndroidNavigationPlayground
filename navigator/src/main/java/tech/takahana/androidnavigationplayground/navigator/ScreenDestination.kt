@@ -1,7 +1,11 @@
 package tech.takahana.androidnavigationplayground.navigator
 
-interface ScreenDestination {
-    val routePattern: String
+import tech.takahana.androidnavigationplayground.navigator.ScreenDestination.RoutePattern
 
+interface ScreenDestination<T: RoutePattern> {
     fun route(): String
+
+    interface RoutePattern {
+        val value: String
+    }
 }

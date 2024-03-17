@@ -11,6 +11,7 @@ import tech.takahana.androidnavigationplayground.R
 import tech.takahana.androidnavigationplayground.home.HomeFragment
 import tech.takahana.androidnavigationplayground.player.PlayerActivity
 import tech.takahana.androidnavigationplayground.search.SearchFragment
+import tech.takahana.androidnavigationplayground.trend.TrendFragment
 import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination
 
 fun NavController.createMyAppGraph(
@@ -21,9 +22,10 @@ fun NavController.createMyAppGraph(
     ) {
         fragment<HomeFragment>(route = R.id.destination_home.toRoute(context))
         fragment<SearchFragment>(route = R.id.destination_search.toRoute(context))
-        activity(route = MyAppScreenDestination.Player.routePattern) {
+        activity(route = MyAppScreenDestination.Player.PlayerRoutePattern.value) {
             this.activityClass = PlayerActivity::class
         }
+        fragment<TrendFragment>(route = MyAppScreenDestination.Trend.TrendRoutePattern.value)
     }
 }
 
