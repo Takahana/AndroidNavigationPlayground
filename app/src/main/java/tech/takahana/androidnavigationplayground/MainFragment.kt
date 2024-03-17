@@ -25,11 +25,11 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         bottomNavigationView: BottomNavigationView,
         navController: NavController,
     ) {
-        navController.createMyAppGraph(requireContext())
+        navController.createMyAppGraph()
         bottomNavigationView.setupWithNavController(navController)
         bottomNavigationView.setOnItemSelectedListener {
             try {
-                navController.navigate(it.itemId.toRoute(requireContext()))
+                navController.navigate(it.itemId.toRoute())
                 true
             } catch (e: IllegalArgumentException) {
                 false

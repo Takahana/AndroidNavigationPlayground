@@ -1,7 +1,5 @@
 package tech.takahana.androidnavigationplayground.ui.navigation
 
-import android.content.Context
-import android.content.res.Resources
 import androidx.annotation.IdRes
 import androidx.navigation.NavController
 import androidx.navigation.activity
@@ -14,14 +12,12 @@ import tech.takahana.androidnavigationplayground.search.SearchFragment
 import tech.takahana.androidnavigationplayground.trend.TrendFragment
 import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination
 
-fun NavController.createMyAppGraph(
-    context: Context,
-) {
+fun NavController.createMyAppGraph() {
     graph = createGraph(
-        startDestination = R.id.destination_home.toRoute(context),
+        startDestination = R.id.destination_home.toRoute()
     ) {
-        fragment<HomeFragment>(route = R.id.destination_home.toRoute(context))
-        fragment<SearchFragment>(route = R.id.destination_search.toRoute(context))
+        fragment<HomeFragment>(route = R.id.destination_home.toRoute())
+        fragment<SearchFragment>(route = R.id.destination_search.toRoute())
         activity(route = MyAppScreenDestination.Player.PlayerRoutePattern.value) {
             this.activityClass = PlayerActivity::class
         }
@@ -29,10 +25,6 @@ fun NavController.createMyAppGraph(
     }
 }
 
-fun @receiver:IdRes Int.toRoute(context: Context): String {
-    return try {
-        context.resources.getResourceName(this)
-    } catch (e: Resources.NotFoundException) {
-        toString()
-    }
+fun @receiver:IdRes Int.toRoute(): String {
+    return toString()
 }
