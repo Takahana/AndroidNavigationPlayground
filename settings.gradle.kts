@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "AndroidNavigationPlayground"
 include(":app")
 include(":navigator")
+include(":features:home")
