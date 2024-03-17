@@ -45,20 +45,22 @@ class HomeFragment : Fragment() {
                         color = MaterialTheme.colorScheme.background
                     ) {
                         HomeScreen(
-                            onClick = {
-                                findNavController().navigate(MyAppScreenDestination.Player.route())
-                            }
+                            onClick = { navigateTo(it) }
                         )
                     }
                 }
             }
         }
     }
+
+    private fun navigateTo(destination: MyAppScreenDestination<*>) {
+        findNavController().navigate(destination.route())
+    }
 }
 
 @Composable
 internal fun HomeScreen(
-    onClick: () -> Unit,
+    onClick: (MyAppScreenDestination<*>) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Box(
@@ -74,7 +76,7 @@ internal fun HomeScreen(
 
 @Composable
 internal fun HomeContents(
-    onClick: () -> Unit,
+    onClick: (MyAppScreenDestination<*>) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(
@@ -82,17 +84,34 @@ internal fun HomeContents(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
+        val itemModifier = Modifier.fillMaxWidth()
         item {
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable { onClick() }
-                ,
-            ) {
-                Box(modifier = Modifier.padding(16.dp)) {
+            HomeContent(
+                content = {
                     Text(text = "Open Player")
-                }
-            }
+                },
+                onClick = {
+                    onClick(MyAppScreenDestination.Player)
+                },
+                modifier = itemModifier,
+            )
+        }
+    }
+}
+
+@Composable
+internal fun HomeContent(
+    content: @Composable () -> Unit,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Card(
+        modifier = modifier
+            .clickable { onClick() }
+        ,
+    ) {
+        Box(modifier = Modifier.padding(16.dp)) {
+            content()
         }
     }
 }
