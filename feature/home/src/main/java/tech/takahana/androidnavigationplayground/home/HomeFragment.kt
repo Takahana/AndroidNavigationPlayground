@@ -96,6 +96,17 @@ internal fun HomeContents(
                 modifier = itemModifier,
             )
         }
+        item {
+            HomeContent(
+                content = {
+                    Text(text = "Open Trend")
+                },
+                onClick = {
+                    onClick(MyAppScreenDestination.Trend("trendId"))
+                },
+                modifier = itemModifier,
+            )
+        }
     }
 }
 
