@@ -7,5 +7,7 @@ interface ScreenDestination<T: RoutePattern> {
 
     interface RoutePattern {
         val value: String
+
+        operator fun invoke() = value
     }
 }
