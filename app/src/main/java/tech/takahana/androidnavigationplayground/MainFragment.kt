@@ -12,18 +12,21 @@ import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyApp
 
 class MainFragment : Fragment(R.layout.fragment_main) {
 
+    private val navController: NavController
+        get() {
+            val navHostFragment = childFragmentManager.findFragmentById(R.id.main_fragment_container) as NavHostFragment
+            return navHostFragment.navController
+        }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val navHostFragment = childFragmentManager.findFragmentById(R.id.main_fragment_container) as NavHostFragment
-        val navController = navHostFragment.navController
         val bottomNavigationView = view.findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        setupNavGraph(bottomNavigationView, navController)
+        setupNavGraph(bottomNavigationView)
     }
 
     private fun setupNavGraph(
         bottomNavigationView: BottomNavigationView,
-        navController: NavController,
     ) {
         navController.createMyAppGraph()
         bottomNavigationView.setupWithNavController(navController)
