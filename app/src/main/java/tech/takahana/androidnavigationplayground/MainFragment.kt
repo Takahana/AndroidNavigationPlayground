@@ -7,6 +7,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import tech.takahana.androidnavigationplayground.navigator.FragmentScreenNavigator
 import tech.takahana.androidnavigationplayground.ui.navigation.createMyAppGraph
 import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination
 
@@ -17,6 +18,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             val navHostFragment = childFragmentManager.findFragmentById(R.id.main_fragment_container) as NavHostFragment
             return navHostFragment.navController
         }
+    private val screenNavigator by lazy { FragmentScreenNavigator(navController) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -31,13 +33,13 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         navController.createMyAppGraph()
         bottomNavigationView.setupWithNavController(navController)
         bottomNavigationView.setOnItemSelectedListener {
-            val route = when (it.itemId) {
+            val destination = when (it.itemId) {
                 R.id.menu_main_bottom_home -> MyAppScreenDestination.Home
                 R.id.menu_main_bottom_search -> MyAppScreenDestination.Search
                 else -> return@setOnItemSelectedListener false
             }
             try {
-                navController.navigate(route.route())
+                screenNavigator.navigate(destination)
                 true
             } catch (e: IllegalArgumentException) {
                 false
