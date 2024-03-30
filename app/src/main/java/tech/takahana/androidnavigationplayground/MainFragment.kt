@@ -9,7 +9,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import tech.takahana.androidnavigationplayground.navigator.FragmentScreenNavigator
 import tech.takahana.androidnavigationplayground.navigator.ScreenNavigator
-import tech.takahana.androidnavigationplayground.ui.navigation.createMyAppGraph
+import tech.takahana.androidnavigationplayground.ui.navigation.createMainBottomNavGraph
 import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination
 
 class MainFragment : Fragment(R.layout.fragment_main) {
@@ -31,7 +31,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private fun setupNavGraph(
         bottomNavigationView: BottomNavigationView,
     ) {
-        navController.createMyAppGraph()
+        navController.createMainBottomNavGraph()
         bottomNavigationView.setupWithNavController(navController)
         bottomNavigationView.setOnItemSelectedListener {
             val destination = when (it.itemId) {

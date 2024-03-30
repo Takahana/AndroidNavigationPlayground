@@ -13,7 +13,7 @@ import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyApp
 import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination.Search.SearchRoutePattern
 import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination.Trend.TrendRoutePattern
 
-fun NavController.createMyAppGraph() {
+fun NavController.createMainBottomNavGraph() {
     graph = createGraph(
         startDestination = HomeRoutePattern()
     ) {
