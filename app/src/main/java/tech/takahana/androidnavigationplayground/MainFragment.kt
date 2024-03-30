@@ -8,6 +8,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import tech.takahana.androidnavigationplayground.navigator.FragmentScreenNavigator
+import tech.takahana.androidnavigationplayground.navigator.ScreenNavigator
 import tech.takahana.androidnavigationplayground.ui.navigation.createMyAppGraph
 import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination
 
@@ -18,7 +19,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             val navHostFragment = childFragmentManager.findFragmentById(R.id.main_fragment_container) as NavHostFragment
             return navHostFragment.navController
         }
-    private val screenNavigator by lazy { FragmentScreenNavigator(navController) }
+    private val screenNavigator: ScreenNavigator by lazy { FragmentScreenNavigator(navController) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
