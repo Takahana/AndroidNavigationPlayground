@@ -5,7 +5,6 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import tech.takahana.androidnavigationplayground.navigator.FragmentScreenNavigator
 import tech.takahana.androidnavigationplayground.navigator.ScreenNavigator
@@ -32,7 +31,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         bottomNavigationView: BottomNavigationView,
     ) {
         navController.createMainBottomNavGraph()
-        bottomNavigationView.setupWithNavController(navController)
         bottomNavigationView.setOnItemSelectedListener {
             val destination = when (it.itemId) {
                 R.id.menu_main_bottom_home -> MyAppScreenDestination.Home
