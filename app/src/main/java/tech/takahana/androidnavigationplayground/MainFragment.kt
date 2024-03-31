@@ -40,11 +40,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     ) {
         navController.createMainBottomNavGraph()
         bottomNavigationView.setOnItemSelectedListener {
-            val destination = when (it.itemId) {
-                R.id.menu_main_bottom_home -> MyAppScreenDestination.Home
-                R.id.menu_main_bottom_search -> MyAppScreenDestination.Search
-                else -> return@setOnItemSelectedListener false
-            }
+            val destination = MyAppScreenDestination.of(it.itemId)
+                ?: return@setOnItemSelectedListener false
             try {
                 screenNavigator.navigate(destination)
                 true
