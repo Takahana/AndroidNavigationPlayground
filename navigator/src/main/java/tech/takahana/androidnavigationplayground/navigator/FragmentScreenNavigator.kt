@@ -7,6 +7,10 @@ class FragmentScreenNavigator(
 ) : ScreenNavigator {
 
     override fun navigate(destination: ScreenDestination<*>) {
-        navController.navigate(destination.route)
+        val location = destination.getLocation()
+        navController.navigate(
+            route = destination.route,
+            navOptions = location?.createNavOptions(navController),
+        )
     }
 }

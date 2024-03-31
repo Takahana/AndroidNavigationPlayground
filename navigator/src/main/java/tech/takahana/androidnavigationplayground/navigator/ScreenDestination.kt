@@ -6,6 +6,8 @@ interface ScreenDestination<T: RoutePattern> {
 
     val route: String
 
+    fun getLocation(): ScreenLocation? = null
+
     interface RoutePattern {
         val value: String
 
