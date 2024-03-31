@@ -6,7 +6,7 @@ import tech.takahana.androidnavigationplayground.navigator.ScreenDestination.Rou
 sealed interface MyAppScreenDestination<T: RoutePattern> : ScreenDestination<T> {
 
     data object Home : MyAppScreenDestination<Home.HomeRoutePattern> {
-        override fun route(): String = HomeRoutePattern.value
+        override val route: String = HomeRoutePattern.value
 
         object HomeRoutePattern : RoutePattern {
             override val value: String = "home"
@@ -14,7 +14,7 @@ sealed interface MyAppScreenDestination<T: RoutePattern> : ScreenDestination<T> 
     }
 
     data object Search : MyAppScreenDestination<Search.SearchRoutePattern> {
-        override fun route(): String = SearchRoutePattern.value
+        override val route: String = SearchRoutePattern.value
 
         object SearchRoutePattern : RoutePattern {
             override val value: String = "search"
@@ -23,7 +23,7 @@ sealed interface MyAppScreenDestination<T: RoutePattern> : ScreenDestination<T> 
 
     data object Player : MyAppScreenDestination<Player.PlayerRoutePattern> {
 
-        override fun route(): String = PlayerRoutePattern.value
+        override val route: String = PlayerRoutePattern.value
 
         object PlayerRoutePattern : RoutePattern {
             override val value: String = "player"
@@ -31,7 +31,7 @@ sealed interface MyAppScreenDestination<T: RoutePattern> : ScreenDestination<T> 
     }
 
     data class Trend(val id: String) : MyAppScreenDestination<Trend.TrendRoutePattern> {
-        override fun route(): String = "trend/$id"
+        override val route: String = "trend/$id"
 
         object TrendRoutePattern : RoutePattern {
             override val value: String = "trend/{id}"

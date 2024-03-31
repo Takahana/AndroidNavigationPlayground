@@ -7,6 +7,6 @@ class FragmentScreenNavigator(
 ) : ScreenNavigator {
 
     override fun navigate(destination: ScreenDestination<*>) {
-        navController.navigate(destination.route())
+        navController.navigate(destination.route)
     }
 }
