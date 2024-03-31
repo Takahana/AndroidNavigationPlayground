@@ -45,4 +45,6 @@ sealed interface MyAppScreenDestination<T: RoutePattern> : ScreenDestination<T> 
             override val value: String = "trend/{id}"
         }
     }
+
+    companion object
 }
