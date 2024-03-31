@@ -24,10 +24,10 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import tech.takahana.androidnavigationplayground.navigator.findScreenNavigator
 import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination
 import tech.takahana.androidnavigationplayground.uicomponent.ui.theme.AndroidNavigationPlaygroundTheme
+import tech.takahana.androidnavigationplayground.uicomponent.uimodel.id.TrendIdUiModel
 
 class HomeFragment : Fragment() {
 
@@ -100,10 +100,10 @@ internal fun HomeContents(
         item {
             HomeContent(
                 content = {
-                    Text(text = "Open Trend")
+                    Text(text = "Open Trend 1")
                 },
                 onClick = {
-                    onClick(MyAppScreenDestination.Trend("trendId"))
+                    onClick(MyAppScreenDestination.Trend(TrendIdUiModel("trend1")))
                 },
                 modifier = itemModifier,
             )

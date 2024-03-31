@@ -17,8 +17,17 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.fragment.app.Fragment
 import tech.takahana.androidnavigationplayground.uicomponent.ui.theme.AndroidNavigationPlaygroundTheme
+import tech.takahana.androidnavigationplayground.uicomponent.uimodel.id.TrendIdUiModel
+import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination.Trend as TrendDestination
 
 class TrendFragment : Fragment() {
+
+    private val trendId: TrendIdUiModel by lazy {
+        val trendId = requireArguments().getString(TrendDestination.Key.TREND_ID)
+        TrendIdUiModel(
+            requireNotNull(trendId)
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,7 +43,9 @@ class TrendFragment : Fragment() {
                         modifier = Modifier.fillMaxSize(),
                         color = MaterialTheme.colorScheme.background
                     ) {
-                        TrendScreen()
+                        TrendScreen(
+                            trendId = trendId,
+                        )
                     }
                 }
             }
@@ -43,11 +54,13 @@ class TrendFragment : Fragment() {
 }
 
 @Composable
-internal fun TrendScreen() {
+internal fun TrendScreen(
+    trendId: TrendIdUiModel,
+) {
     Box(
         contentAlignment = Alignment.Center,
     ) {
-        Text(text = TrendFragment::class.java.simpleName)
+        Text(text = trendId.value)
     }
 }
 
@@ -60,7 +73,9 @@ internal fun TrendScreenPreview() {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            TrendScreen()
+            TrendScreen(
+                trendId = TrendIdUiModel("trend1")
+            )
         }
     }
 }

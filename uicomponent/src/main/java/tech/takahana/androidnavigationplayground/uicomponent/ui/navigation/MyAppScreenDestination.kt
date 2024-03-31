@@ -3,6 +3,7 @@ package tech.takahana.androidnavigationplayground.uicomponent.ui.navigation
 import tech.takahana.androidnavigationplayground.navigator.BottomNavigationItem
 import tech.takahana.androidnavigationplayground.navigator.ScreenDestination
 import tech.takahana.androidnavigationplayground.navigator.ScreenDestination.RoutePattern
+import tech.takahana.androidnavigationplayground.uicomponent.uimodel.id.TrendIdUiModel
 
 sealed interface MyAppScreenDestination<T: RoutePattern> : ScreenDestination<T> {
 
@@ -37,12 +38,18 @@ sealed interface MyAppScreenDestination<T: RoutePattern> : ScreenDestination<T> 
         }
     }
 
-    data class Trend(val id: String) : MyAppScreenDestination<Trend.TrendRoutePattern> {
+    data class Trend(
+        val trendId: TrendIdUiModel,
+    ) : MyAppScreenDestination<Trend.TrendRoutePattern> {
 
-        override val route: String = "trend/$id"
+        override val route: String = "trend/${trendId.value}"
 
         object TrendRoutePattern : RoutePattern {
-            override val value: String = "trend/{id}"
+            override val value: String = "trend/{${Key.TREND_ID}}"
+        }
+
+        object Key {
+            const val TREND_ID = "trendId"
         }
     }
 
