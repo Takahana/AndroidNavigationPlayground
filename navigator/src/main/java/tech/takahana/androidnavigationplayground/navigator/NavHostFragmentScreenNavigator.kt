@@ -2,7 +2,7 @@ package tech.takahana.androidnavigationplayground.navigator
 
 import androidx.navigation.NavController
 
-class FragmentScreenNavigator(
+class NavHostFragmentScreenNavigator(
     private val navController: NavController,
 ) : ScreenNavigator {
 

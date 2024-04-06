@@ -10,7 +10,7 @@ import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import tech.takahana.androidnavigationplayground.navigator.FragmentScreenNavigator
+import tech.takahana.androidnavigationplayground.navigator.NavHostFragmentScreenNavigator
 import tech.takahana.androidnavigationplayground.navigator.ScreenNavigator
 import tech.takahana.androidnavigationplayground.ui.navigation.createMainBottomNavGraph
 import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination
@@ -22,7 +22,9 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             val navHostFragment = childFragmentManager.findFragmentById(R.id.main_fragment_container) as NavHostFragment
             return navHostFragment.navController
         }
-    private val screenNavigator: ScreenNavigator by lazy { FragmentScreenNavigator(navController) }
+    private val screenNavigator: ScreenNavigator by lazy {
+        NavHostFragmentScreenNavigator(navController)
+    }
     private val onDestinationChangedListener =
         NavController.OnDestinationChangedListener { _, destination, _ ->
             updateBottomNavigationItem(destination)
