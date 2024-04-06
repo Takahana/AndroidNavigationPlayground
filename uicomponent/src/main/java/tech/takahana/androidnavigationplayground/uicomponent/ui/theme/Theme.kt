@@ -1,6 +1,8 @@
 package tech.takahana.androidnavigationplayground.uicomponent.ui.theme
 
 import android.app.Activity
+import android.content.Context
+import android.content.ContextWrapper
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -56,7 +58,7 @@ fun AndroidNavigationPlaygroundTheme(
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
-            val window = (view.context as Activity).window
+            val window = view.context.findActivity().window
             window.statusBarColor = colorScheme.primary.toArgb()
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
         }
@@ -67,4 +69,12 @@ fun AndroidNavigationPlaygroundTheme(
         typography = Typography,
         content = content
     )
+}
+
+private fun Context.findActivity(): Activity {
+    return when (this) {
+        is Activity -> this
+        is ContextWrapper -> baseContext.findActivity()
+        else -> throw IllegalStateException("No activity found")
+    }
 }
