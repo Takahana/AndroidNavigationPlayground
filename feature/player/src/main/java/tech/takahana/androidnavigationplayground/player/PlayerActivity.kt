@@ -22,11 +22,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dagger.hilt.android.AndroidEntryPoint
+import tech.takahana.androidnavigationplayground.navigator.ScreenNavigator
 import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination
 import tech.takahana.androidnavigationplayground.uicomponent.ui.theme.AndroidNavigationPlaygroundTheme
 import tech.takahana.androidnavigationplayground.uicomponent.uimodel.id.TrendIdUiModel
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class PlayerActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var screenNavigator: ScreenNavigator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,16 +44,24 @@ class PlayerActivity : AppCompatActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    PlayerScreen()
+                    PlayerScreen(
+                        onClick = { navigateTo(it) }
+                    )
                 }
             }
         }
+    }
+
+    private fun navigateTo(destination: MyAppScreenDestination<*>) {
+        screenNavigator.navigate(destination)
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun PlayerScreen()  {
+internal fun PlayerScreen(
+    onClick: (MyAppScreenDestination<*>) -> Unit,
+) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -58,7 +73,7 @@ internal fun PlayerScreen()  {
     ) { innerPadding ->
         PlayerContents(
             modifier = Modifier.padding(innerPadding),
-            onClick = {},
+            onClick = onClick,
         )
     }
 }
@@ -124,7 +139,9 @@ internal fun PlayerScreenPreview()  {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            PlayerScreen()
+            PlayerScreen(
+                onClick = { }
+            )
         }
     }
 }

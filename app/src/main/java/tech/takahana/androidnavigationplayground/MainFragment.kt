@@ -28,7 +28,11 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             return navHostFragment.navController
         }
     private val screenNavigator: NavHostFragmentScreenNavigator by lazy {
-        navHostFragmentScreenNavigatorFactory.create(navController, viewLifecycleOwner)
+        navHostFragmentScreenNavigatorFactory.create(
+            navController,
+            viewLifecycleOwner,
+            requireActivity()
+        )
     }
     private val onDestinationChangedListener =
         NavController.OnDestinationChangedListener { _, destination, _ ->
@@ -57,7 +61,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             }
         }
         navController.addOnDestinationChangedListener(onDestinationChangedListener)
-        screenNavigator.prepare()
+        // Initialize
+        screenNavigator
     }
 
     override fun onDestroyView() {
