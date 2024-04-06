@@ -4,10 +4,10 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import tech.takahana.androidnavigationplayground.navigator.DefaultScreenNavigator
-import tech.takahana.androidnavigationplayground.navigator.NavHostFragmentScreenNavigator
-import tech.takahana.androidnavigationplayground.navigator.ScreenNavigationDispatcher
-import tech.takahana.androidnavigationplayground.navigator.ScreenNavigator
+import tech.takahana.androidnavigationplayground.navigator.components.DefaultScreenNavigator
+import tech.takahana.androidnavigationplayground.navigator.components.NavHostFragmentScreenNavigator
+import tech.takahana.androidnavigationplayground.navigator.components.ScreenNavigationDispatcher
+import tech.takahana.androidnavigationplayground.navigator.components.ScreenNavigator
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)

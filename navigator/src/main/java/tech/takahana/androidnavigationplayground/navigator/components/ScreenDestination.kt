@@ -1,6 +1,6 @@
-package tech.takahana.androidnavigationplayground.navigator
+package tech.takahana.androidnavigationplayground.navigator.components
 
-import tech.takahana.androidnavigationplayground.navigator.ScreenDestination.RoutePattern
+import tech.takahana.androidnavigationplayground.navigator.components.ScreenDestination.RoutePattern
 
 interface ScreenDestination<T: RoutePattern> {
 

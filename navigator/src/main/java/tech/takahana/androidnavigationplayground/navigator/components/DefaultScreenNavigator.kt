@@ -1,4 +1,4 @@
-package tech.takahana.androidnavigationplayground.navigator
+package tech.takahana.androidnavigationplayground.navigator.components
 
 class DefaultScreenNavigator(
     private val dispatcher: ScreenNavigationDispatcher,

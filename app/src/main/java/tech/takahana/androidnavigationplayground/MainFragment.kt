@@ -8,7 +8,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
-import tech.takahana.androidnavigationplayground.navigator.NavHostFragmentScreenNavigator
+import tech.takahana.androidnavigationplayground.navigator.components.NavHostFragmentScreenNavigator
 import tech.takahana.androidnavigationplayground.navigator.ui.setupWithNavController
 import tech.takahana.androidnavigationplayground.ui.navigation.createMainBottomNavGraph
 import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination

@@ -1,4 +1,4 @@
-package tech.takahana.androidnavigationplayground.navigator
+package tech.takahana.androidnavigationplayground.navigator.components
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

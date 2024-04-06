@@ -6,8 +6,8 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import tech.takahana.androidnavigationplayground.navigator.ScreenDestination
-import tech.takahana.androidnavigationplayground.navigator.ScreenNavigator
+import tech.takahana.androidnavigationplayground.navigator.components.ScreenDestination
+import tech.takahana.androidnavigationplayground.navigator.components.ScreenNavigator
 import java.lang.ref.WeakReference
 
 fun BottomNavigationView.setupWithNavController(

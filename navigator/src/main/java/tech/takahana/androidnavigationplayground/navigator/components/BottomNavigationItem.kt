@@ -1,4 +1,4 @@
-package tech.takahana.androidnavigationplayground.navigator
+package tech.takahana.androidnavigationplayground.navigator.components
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination

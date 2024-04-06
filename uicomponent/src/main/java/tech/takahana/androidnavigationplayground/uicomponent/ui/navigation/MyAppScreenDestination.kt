@@ -1,8 +1,8 @@
 package tech.takahana.androidnavigationplayground.uicomponent.ui.navigation
 
-import tech.takahana.androidnavigationplayground.navigator.BottomNavigationItem
-import tech.takahana.androidnavigationplayground.navigator.ScreenDestination
-import tech.takahana.androidnavigationplayground.navigator.ScreenDestination.RoutePattern
+import tech.takahana.androidnavigationplayground.navigator.components.BottomNavigationItem
+import tech.takahana.androidnavigationplayground.navigator.components.ScreenDestination
+import tech.takahana.androidnavigationplayground.navigator.components.ScreenDestination.RoutePattern
 import tech.takahana.androidnavigationplayground.uicomponent.uimodel.id.TrendIdUiModel
 
 sealed interface MyAppScreenDestination<T: RoutePattern> : ScreenDestination<T> {

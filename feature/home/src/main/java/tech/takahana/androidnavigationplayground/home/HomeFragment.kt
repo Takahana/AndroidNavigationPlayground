@@ -25,7 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import dagger.hilt.android.AndroidEntryPoint
-import tech.takahana.androidnavigationplayground.navigator.ScreenNavigator
+import tech.takahana.androidnavigationplayground.navigator.components.ScreenNavigator
 import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination
 import tech.takahana.androidnavigationplayground.uicomponent.ui.theme.AndroidNavigationPlaygroundTheme
 import tech.takahana.androidnavigationplayground.uicomponent.uimodel.id.TrendIdUiModel
