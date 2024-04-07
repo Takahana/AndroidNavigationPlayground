@@ -9,10 +9,14 @@ import androidx.test.espresso.matcher.ViewMatchers.isSelected
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import com.google.common.truth.Truth.assertThat
 import tech.takahana.androidnavigationplayground.home.HomeFragment
+import tech.takahana.androidnavigationplayground.navigator.components.ScreenNavigationDispatcher
 import tech.takahana.androidnavigationplayground.search.SearchFragment
 import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination
+import javax.inject.Inject
 
-class NavigationRobot {
+class NavigationRobot @Inject constructor(
+    private val screenNavigationDispatcher: ScreenNavigationDispatcher,
+) {
 
     private val bottomNavMenuHomeId = R.id.menu_main_bottom_home
     private val bottomNavMenuSearchId = R.id.menu_main_bottom_search
