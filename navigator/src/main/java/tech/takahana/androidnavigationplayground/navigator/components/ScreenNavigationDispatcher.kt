@@ -1,5 +1,6 @@
 package tech.takahana.androidnavigationplayground.navigator.components
 
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -10,7 +11,8 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
 class ScreenNavigationDispatcher(
-    private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Main + SupervisorJob()),
+    dispatcher: CoroutineDispatcher = Dispatchers.Main,
+    private val coroutineScope: CoroutineScope = CoroutineScope(dispatcher + SupervisorJob()),
 ) {
 
     private val requestDeque = ArrayDeque<ScreenNavigationRequest>()
