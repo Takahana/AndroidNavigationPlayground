@@ -33,11 +33,12 @@ class NavigationTest {
     }
 
     @Test
-    fun navigateToStackableScreen() = navigationRobot {
+    fun navigateToStackableScreenOnBottomNavigation() = navigationRobot {
         bootScreen()
         displayingHomeScreen()
         navigateToTrendScreen("trendId")
         displayingTrendScreen("trendId")
+        selectingBottomNavigationItemOfHome()
         navigateUp()
         displayingHomeScreen()
     }
