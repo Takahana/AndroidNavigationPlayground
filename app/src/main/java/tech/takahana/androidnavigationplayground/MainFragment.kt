@@ -3,6 +3,7 @@ package tech.takahana.androidnavigationplayground
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.IdRes
+import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -20,11 +21,13 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     @Inject
     lateinit var navHostFragmentScreenNavigatorFactory: NavHostFragmentScreenNavigator.Factory
 
+    @VisibleForTesting
+    val navHostFragment: NavHostFragment
+        get() = childFragmentManager.findFragmentById(R.id.main_fragment_container) as NavHostFragment
+
     private val navController: NavController
-        get() {
-            val navHostFragment = childFragmentManager.findFragmentById(R.id.main_fragment_container) as NavHostFragment
-            return navHostFragment.navController
-        }
+        get() = navHostFragment.navController
+
     private val screenNavigator: NavHostFragmentScreenNavigator by lazy {
         navHostFragmentScreenNavigatorFactory.create(
             navController,

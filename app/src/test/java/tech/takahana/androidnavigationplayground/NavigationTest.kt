@@ -29,9 +29,11 @@ class NavigationTest {
     @Test
     fun switchBottomNavigationItem() = navigationRobot {
         bootScreen()
+        displayHomeScreen()
         switchBottomNavigationItem(
             from = MyAppScreenDestination.Home,
             to = MyAppScreenDestination.Search,
         )
+        displaySearchScreen()
     }
 }
