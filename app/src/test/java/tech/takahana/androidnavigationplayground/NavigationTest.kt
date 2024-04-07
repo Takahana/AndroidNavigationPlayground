@@ -22,14 +22,42 @@ class NavigationTest {
     lateinit var navigationRobot: NavigationRobot
 
     @Test
-    fun switchBottomNavigationItem() = navigationRobot {
+    fun switchBottomNavigationItemBySelectItem() = navigationRobot {
         bootScreen()
         displayingHomeScreen()
+
+        navigateToTrendScreen("trendId")
+        displayingTrendScreen("trendId")
+        selectingBottomNavigationItemOfHome()
+
         switchBottomNavigationItem(
             from = MyAppScreenDestination.Home,
             to = MyAppScreenDestination.Search,
         )
         displayingSearchScreen()
+
+        switchBottomNavigationItem(
+            from = MyAppScreenDestination.Search,
+            to = MyAppScreenDestination.Home,
+        )
+        displayingTrendScreen("trendId")
+        selectingBottomNavigationItemOfHome()
+    }
+
+    fun switchBottomNavigationItemByNavigateUp() = navigationRobot {
+        bootScreen()
+        displayingHomeScreen()
+
+        navigateToTrendScreen("trendId")
+        displayingTrendScreen("trendId")
+        selectingBottomNavigationItemOfHome()
+
+        switchBottomNavigationItem(
+            from = MyAppScreenDestination.Home,
+            to = MyAppScreenDestination.Search,
+        )
+        displayingSearchScreen()
+
         navigateUp()
         displayingHomeScreen()
     }
