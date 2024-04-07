@@ -31,4 +31,14 @@ class NavigationTest {
         )
         displaySearchScreen()
     }
+
+    @Test
+    fun navigateToStackableScreen() = navigationRobot {
+        bootScreen()
+        displayHomeScreen()
+        navigateToTrendScreen("trendId")
+        displayTrendScreen("trendId")
+        navigateUp()
+        displayHomeScreen()
+    }
 }

@@ -11,7 +11,9 @@ import com.google.common.truth.Truth.assertThat
 import tech.takahana.androidnavigationplayground.home.HomeFragment
 import tech.takahana.androidnavigationplayground.navigator.components.ScreenNavigationDispatcher
 import tech.takahana.androidnavigationplayground.search.SearchFragment
+import tech.takahana.androidnavigationplayground.trend.TrendFragment
 import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination
+import tech.takahana.androidnavigationplayground.uicomponent.uimodel.id.TrendIdUiModel
 import javax.inject.Inject
 
 class NavigationRobot @Inject constructor(
@@ -47,10 +49,35 @@ class NavigationRobot @Inject constructor(
         assertThat(fragmentOnMainFragmentContainer()).isInstanceOf(SearchFragment::class.java)
     }
 
+    fun displayTrendScreen(trendId: String) {
+        val fragment = fragmentOnMainFragmentContainer()
+        val args = fragment.requireArguments()
+        assertThat(fragment).isInstanceOf(TrendFragment::class.java)
+        assertThat(args.getString(MyAppScreenDestination.Trend.Key.TREND_ID)).isEqualTo(trendId)
+    }
+
+    fun navigateToTrendScreen(
+        trendId: String,
+    ) {
+        navigateTo(
+            MyAppScreenDestination.Trend(TrendIdUiModel(trendId))
+        )
+    }
+
+    fun navigateUp() {
+        mainFragment.navHostFragment.navController.navigateUp()
+        mainFragment.navHostFragment.childFragmentManager.executePendingTransactions()
+    }
+
     private fun fragmentOnMainFragmentContainer(): Fragment {
         return requireNotNull(
             mainFragment.navHostFragment.childFragmentManager.findFragmentById(R.id.main_fragment_container)
         )
+    }
+
+    private fun navigateTo(destination: MyAppScreenDestination<*>) {
+        screenNavigationDispatcher.dispatch(destination)
+        mainFragment.navHostFragment.childFragmentManager.executePendingTransactions()
     }
 
     operator fun invoke(block: NavigationRobot.() -> Unit) {
