@@ -41,17 +41,17 @@ class NavigationRobot @Inject constructor(
         onView(withId(to.bottomNavMenuId())).check(matches(isSelected()))
     }
 
-    fun displayHomeScreen() {
+    fun displayingHomeScreen() {
         assertThat(fragmentOnMainFragmentContainer()).isInstanceOf(HomeFragment::class.java)
         onView(withId(MyAppScreenDestination.Home.bottomNavMenuId())).check(matches(isSelected()))
     }
 
-    fun displaySearchScreen() {
+    fun displayingSearchScreen() {
         assertThat(fragmentOnMainFragmentContainer()).isInstanceOf(SearchFragment::class.java)
         onView(withId(MyAppScreenDestination.Search.bottomNavMenuId())).check(matches(isSelected()))
     }
 
-    fun displayTrendScreen(trendId: String) {
+    fun displayingTrendScreen(trendId: String) {
         val fragment = fragmentOnMainFragmentContainer()
         val args = fragment.requireArguments()
         assertThat(fragment).isInstanceOf(TrendFragment::class.java)
