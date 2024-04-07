@@ -43,12 +43,12 @@ class NavigationRobot @Inject constructor(
 
     fun displayingHomeScreen() {
         assertThat(fragmentOnMainFragmentContainer()).isInstanceOf(HomeFragment::class.java)
-        onView(withId(MyAppScreenDestination.Home.bottomNavMenuId())).check(matches(isSelected()))
+        selectingBottomNavigationItemOfHome()
     }
 
     fun displayingSearchScreen() {
         assertThat(fragmentOnMainFragmentContainer()).isInstanceOf(SearchFragment::class.java)
-        onView(withId(MyAppScreenDestination.Search.bottomNavMenuId())).check(matches(isSelected()))
+        selectingBottomNavigationItemOfSearch()
     }
 
     fun displayingTrendScreen(trendId: String) {
@@ -64,6 +64,14 @@ class NavigationRobot @Inject constructor(
         navigateTo(
             MyAppScreenDestination.Trend(TrendIdUiModel(trendId))
         )
+    }
+
+    fun selectingBottomNavigationItemOfHome() {
+        onView(withId(MyAppScreenDestination.Home.bottomNavMenuId())).check(matches(isSelected()))
+    }
+
+    fun selectingBottomNavigationItemOfSearch() {
+        onView(withId(MyAppScreenDestination.Search.bottomNavMenuId())).check(matches(isSelected()))
     }
 
     fun navigateUp() {
