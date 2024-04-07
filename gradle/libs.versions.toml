@@ -14,6 +14,7 @@ navigation = "2.7.7"
 hilt = "2.50"
 roboelectric = "4.12"
 fragment = "1.6.2"
+truth = "1.4.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -40,6 +41,7 @@ hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.r
 hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt" }
 hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
 robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "roboelectric" }
+truth = { group = "com.google.truth", name = "truth", version.ref = "truth" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
