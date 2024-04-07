@@ -30,6 +30,8 @@ class NavigationTest {
             to = MyAppScreenDestination.Search,
         )
         displayingSearchScreen()
+        navigateUp()
+        displayingHomeScreen()
     }
 
     @Test
