@@ -44,6 +44,7 @@ class NavigationTest {
         selectingBottomNavigationItemOfHome()
     }
 
+    @Test
     fun switchBottomNavigationItemByNavigateUp() = navigationRobot {
         bootScreen()
         displayingHomeScreen()
