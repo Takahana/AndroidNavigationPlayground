@@ -1,0 +1,16 @@
+name: 'Send Artifact Link to Slack'
+description: 'Send the artifact link to Slack'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Send Slack Message
+      uses: slackapi/slack-github-action@v1.25.0
+      with:
+        payload: |
+          {
+            "text": "Hello",
+          }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
