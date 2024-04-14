@@ -14,6 +14,6 @@ runs:
           {
             "text": "Hello",
           }
-        env:
-          SLACK_WEBHOOK_URL: ${{ inputs.slack-webhook-url }}
-          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+      env:
+        SLACK_WEBHOOK_URL: ${{ inputs.slack-webhook-url }}
+        SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
