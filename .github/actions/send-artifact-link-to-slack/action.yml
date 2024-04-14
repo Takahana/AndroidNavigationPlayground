@@ -18,7 +18,7 @@ runs:
       with:
         payload: |
           {
-            "text": "Download the artifact!"
+            "text": "Download the artifact!",
             "blocks": [
               {
                 "type": "actions",
