@@ -28,9 +28,9 @@ runs:
                     "type": "button",
                     "text": {
                       "type": "plain_text",
-                      "text": ${{ inputs.artifact-name }
+                      "text": "${{ inputs.artifact-name }"
                     },
-                    "url": ${{ inputs.artifact-link-url }}
+                    "url": "${{ inputs.artifact-link-url }}"
                   }
                 ]
               }
