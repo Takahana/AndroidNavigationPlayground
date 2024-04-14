@@ -1,0 +1,12 @@
+name: 'Assemble Debug'
+description: 'Run gradlew assembleDebug'
+runs:
+  using: "composite"
+  steps:
+    - name: Setup JDK 17
+      uses: ./.github/actions/setup-java
+      with:
+        java-version: 17
+    - name: Run gradlew assembleDebug
+      run: ./gradlew assembleDebug
+      shell: bash
