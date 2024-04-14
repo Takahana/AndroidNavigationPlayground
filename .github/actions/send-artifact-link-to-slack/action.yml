@@ -12,7 +12,7 @@ runs:
       with:
         payload: |
           {
-            "text": "Hello",
+            "text": "Hello"
           }
       env:
         SLACK_WEBHOOK_URL: ${{ inputs.slack-webhook-url }}
