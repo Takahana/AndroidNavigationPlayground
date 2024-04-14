@@ -1,6 +1,9 @@
 name: 'Send Artifact Link to Slack'
 description: 'Send the artifact link to Slack'
-
+inputs:
+  slack-webhook-url:
+    description: 'Slack webhook URL'
+    required: true
 runs:
   using: "composite"
   steps:
@@ -12,5 +15,5 @@ runs:
             "text": "Hello",
           }
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_URL: ${{ inputs.slack-webhook-url }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
