@@ -5,3 +5,4 @@ runs:
   steps:
     - name: Run gradlew assembleDebug
       run: ./gradlew assembleDebug
+      shell: bash
