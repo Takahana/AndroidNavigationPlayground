@@ -1,0 +1,41 @@
+name: 'Send Artifact Link to Slack'
+description: 'Send the artifact link to Slack'
+inputs:
+  slack-webhook-url:
+    description: 'Slack webhook URL'
+    required: true
+  artifact-name:
+    description: 'Artifact name'
+    default: 'artifact'
+  artifact-link-url:
+    description: 'Artifact link URL'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Send Slack Message
+      uses: slackapi/slack-github-action@v1.25.0
+      with:
+        payload: |
+          {
+            "text": "Download the artifact!",
+            "blocks": [
+              {
+                "type": "actions",
+                "block_id": "download_artifact_button",
+                "elements": [
+                  {
+                    "type": "button",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "${{ inputs.artifact-name }}"
+                    },
+                    "url": "${{ inputs.artifact-link-url }}"
+                  }
+                ]
+              }
+            ]
+          }
+      env:
+        SLACK_WEBHOOK_URL: ${{ inputs.slack-webhook-url }}
+        SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
