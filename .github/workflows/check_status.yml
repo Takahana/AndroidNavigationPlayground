@@ -21,6 +21,7 @@ jobs:
         with:
           name: app-debug
           path: ./app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
   send_artifact_link_to_slack:
     name: Send Artifact Link to Slack
     needs: upload_debug
