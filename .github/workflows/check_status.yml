@@ -11,6 +11,7 @@ jobs:
         uses: ./.github/actions/assemble-debug
   send_artifact_link_to_slack:
     name: Send Artifact Link to Slack
+    needs: assemble_debug
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
