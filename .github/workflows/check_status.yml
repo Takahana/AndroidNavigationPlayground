@@ -21,4 +21,4 @@ jobs:
         with:
           slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
           artifact-name: app-debug
-          artifact-link-url: ${{ steps.upload_artifact.outputs.artifact_url }}
+          artifact-link-url: ${{ steps.upload_artifact.outputs.artifact-url }}
