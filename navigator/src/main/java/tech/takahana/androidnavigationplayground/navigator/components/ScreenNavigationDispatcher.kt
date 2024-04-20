@@ -41,8 +41,4 @@ class ScreenNavigationDispatcher(
             }
         }
     }
-
-    data class ScreenNavigationRequest(
-        val destination: ScreenDestination,
-    )
 }

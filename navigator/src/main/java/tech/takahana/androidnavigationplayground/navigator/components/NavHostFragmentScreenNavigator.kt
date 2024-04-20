@@ -54,7 +54,7 @@ class NavHostFragmentScreenNavigator(
         }
     }
 
-    private fun handleRequest(request: ScreenNavigationDispatcher.ScreenNavigationRequest) {
+    private fun handleRequest(request: ScreenNavigationRequest) {
         val destination = request.destination
         if (navController.graph.contains(destination.route)) {
             if (lifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
