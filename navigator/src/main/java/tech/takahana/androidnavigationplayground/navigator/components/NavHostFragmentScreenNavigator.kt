@@ -7,6 +7,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import androidx.navigation.contains
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.filterNotNull
@@ -25,7 +26,11 @@ class NavHostFragmentScreenNavigator(
     override fun navigate(destination: ScreenDestination) {
         navController.navigate(
             route = destination.route,
-            navOptions = destination.location?.createNavOptions(navController),
+            navOptions = NavOptions.Builder()
+                .apply {
+                    destination.location?.applyNavOptions(this, navController)
+                }
+                .build(),
         )
     }
 

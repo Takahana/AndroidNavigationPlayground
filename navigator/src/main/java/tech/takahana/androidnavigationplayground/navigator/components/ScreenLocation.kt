@@ -5,7 +5,8 @@ import androidx.navigation.NavOptions
 
 interface ScreenLocation {
 
-    fun createNavOptions(
+    fun applyNavOptions(
+        builder: NavOptions.Builder,
         navController: NavController,
-    ): NavOptions
+    ): NavOptions.Builder
 }

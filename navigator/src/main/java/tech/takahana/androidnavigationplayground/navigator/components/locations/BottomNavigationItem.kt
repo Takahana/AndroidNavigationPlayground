@@ -6,9 +6,10 @@ import androidx.navigation.NavOptions
 import tech.takahana.androidnavigationplayground.navigator.components.ScreenLocation
 
 object BottomNavigationItem : ScreenLocation {
-    override fun createNavOptions(
+    override fun applyNavOptions(
+        builder: NavOptions.Builder,
         navController: NavController,
-    ) = NavOptions.Builder()
+    ) = builder
         .setLaunchSingleTop(true)
         .setRestoreState(true)
         .setPopUpTo(
@@ -16,5 +17,4 @@ object BottomNavigationItem : ScreenLocation {
             inclusive = false,
             saveState = true
         )
-        .build()
 }
