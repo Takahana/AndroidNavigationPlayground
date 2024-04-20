@@ -29,6 +29,7 @@ class NavHostFragmentScreenNavigator(
             navOptions = NavOptions.Builder()
                 .apply {
                     destination.location?.applyNavOptions(this, navController)
+                    destination.transition?.applyNavOptions(this)
                 }
                 .build(),
         )
