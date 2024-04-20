@@ -24,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dagger.hilt.android.AndroidEntryPoint
 import tech.takahana.androidnavigationplayground.navigator.components.ScreenNavigator
+import tech.takahana.androidnavigationplayground.navigator.components.applyPopAnimationsToPendingTransition
 import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination
 import tech.takahana.androidnavigationplayground.uicomponent.ui.theme.AndroidNavigationPlaygroundTheme
 import tech.takahana.androidnavigationplayground.uicomponent.uimodel.id.TrendIdUiModel
@@ -54,6 +55,11 @@ class PlayerActivity : AppCompatActivity() {
 
     private fun navigateTo(destination: MyAppScreenDestination) {
         screenNavigator.navigate(destination)
+    }
+
+    override fun finish() {
+        super.finish()
+        ScreenNavigator.applyPopAnimationsToPendingTransition(this)
     }
 }
 
