@@ -13,7 +13,7 @@ sealed interface MyAppScreenDestination : ScreenDestination {
 
         override fun getLocation() = BottomNavigationItem
 
-        val routePattern = object : RoutePattern {
+        object HomeRoutePattern : RoutePattern {
             override val value: String = "home"
         }
     }
@@ -24,7 +24,7 @@ sealed interface MyAppScreenDestination : ScreenDestination {
 
         override fun getLocation() = BottomNavigationItem
 
-        val routePattern = object : RoutePattern {
+        object SearchRoutePattern : RoutePattern {
             override val value: String = "search"
         }
     }
@@ -33,7 +33,7 @@ sealed interface MyAppScreenDestination : ScreenDestination {
 
         override val route: String = "player"
 
-        val routePattern: RoutePattern = object : RoutePattern {
+        object PlayerRoutePattern : RoutePattern {
             override val value: String = "player"
         }
     }
@@ -48,10 +48,8 @@ sealed interface MyAppScreenDestination : ScreenDestination {
             const val TREND_ID = "trendId"
         }
 
-        companion object {
-            val routePattern: RoutePattern = object : RoutePattern {
-                override val value: String = "trend/{${Key.TREND_ID}}"
-            }
+        object TrendRoutePattern : RoutePattern {
+            override val value: String = "trend/{${Key.TREND_ID}}"
         }
     }
 
