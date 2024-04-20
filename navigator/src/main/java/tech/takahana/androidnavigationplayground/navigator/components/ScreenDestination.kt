@@ -6,4 +6,7 @@ interface ScreenDestination {
 
     val location: ScreenLocation?
         get() = null
+
+    val transition: ScreenTransition?
+        get() = null
 }
