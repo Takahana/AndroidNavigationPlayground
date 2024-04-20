@@ -1,55 +1,57 @@
 package tech.takahana.androidnavigationplayground.uicomponent.ui.navigation
 
 import tech.takahana.androidnavigationplayground.navigator.components.BottomNavigationItem
+import tech.takahana.androidnavigationplayground.navigator.components.RoutePattern
 import tech.takahana.androidnavigationplayground.navigator.components.ScreenDestination
-import tech.takahana.androidnavigationplayground.navigator.components.ScreenDestination.RoutePattern
 import tech.takahana.androidnavigationplayground.uicomponent.uimodel.id.TrendIdUiModel
 
-sealed interface MyAppScreenDestination<T: RoutePattern> : ScreenDestination<T> {
+sealed interface MyAppScreenDestination : ScreenDestination {
 
-    data object Home : MyAppScreenDestination<Home.HomeRoutePattern> {
+    data object Home : MyAppScreenDestination {
 
-        override val route: String = HomeRoutePattern.value
+        override val route: String = "home"
 
         override fun getLocation() = BottomNavigationItem
 
-        object HomeRoutePattern : RoutePattern {
+        val routePattern = object : RoutePattern {
             override val value: String = "home"
         }
     }
 
-    data object Search : MyAppScreenDestination<Search.SearchRoutePattern> {
+    data object Search : MyAppScreenDestination {
 
-        override val route: String = SearchRoutePattern.value
+        override val route: String = "search"
 
         override fun getLocation() = BottomNavigationItem
 
-        object SearchRoutePattern : RoutePattern {
+        val routePattern = object : RoutePattern {
             override val value: String = "search"
         }
     }
 
-    data object Player : MyAppScreenDestination<Player.PlayerRoutePattern> {
+    data object Player : MyAppScreenDestination {
 
-        override val route: String = PlayerRoutePattern.value
+        override val route: String = "player"
 
-        object PlayerRoutePattern : RoutePattern {
+        val routePattern: RoutePattern = object : RoutePattern {
             override val value: String = "player"
         }
     }
 
     data class Trend(
         val trendId: TrendIdUiModel,
-    ) : MyAppScreenDestination<Trend.TrendRoutePattern> {
+    ) : MyAppScreenDestination {
 
         override val route: String = "trend/${trendId.value}"
 
-        object TrendRoutePattern : RoutePattern {
-            override val value: String = "trend/{${Key.TREND_ID}}"
-        }
-
         object Key {
             const val TREND_ID = "trendId"
+        }
+
+        companion object {
+            val routePattern: RoutePattern = object : RoutePattern {
+                override val value: String = "trend/{${Key.TREND_ID}}"
+            }
         }
     }
 

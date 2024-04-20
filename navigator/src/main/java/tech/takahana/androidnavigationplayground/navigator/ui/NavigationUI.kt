@@ -13,7 +13,7 @@ import java.lang.ref.WeakReference
 fun BottomNavigationView.setupWithNavController(
     navController: NavController,
     screenNavigator: ScreenNavigator,
-    matchScreenDestination: (itemId: Int) -> ScreenDestination<*>?,
+    matchScreenDestination: (itemId: Int) -> ScreenDestination?,
 ) {
     setOnItemSelectedListener {
         val destination = matchScreenDestination(it.itemId)
@@ -51,6 +51,6 @@ fun BottomNavigationView.setupWithNavController(
     )
 }
 
-fun NavDestination.hasRoute(screenDestination: ScreenDestination<*>): Boolean {
+fun NavDestination.hasRoute(screenDestination: ScreenDestination): Boolean {
     return hierarchy.any { it.route == screenDestination.route }
 }

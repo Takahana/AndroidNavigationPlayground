@@ -60,14 +60,14 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun navigateTo(destination: MyAppScreenDestination<*>) {
+    private fun navigateTo(destination: MyAppScreenDestination) {
         screenNavigator.navigate(destination)
     }
 }
 
 @Composable
 internal fun HomeScreen(
-    onClick: (MyAppScreenDestination<*>) -> Unit,
+    onClick: (MyAppScreenDestination) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Box(
@@ -83,7 +83,7 @@ internal fun HomeScreen(
 
 @Composable
 internal fun HomeContents(
-    onClick: (MyAppScreenDestination<*>) -> Unit,
+    onClick: (MyAppScreenDestination) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(

@@ -9,10 +9,10 @@ import tech.takahana.androidnavigationplayground.home.HomeFragment
 import tech.takahana.androidnavigationplayground.player.PlayerActivity
 import tech.takahana.androidnavigationplayground.search.SearchFragment
 import tech.takahana.androidnavigationplayground.trend.TrendFragment
-import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination.Home.HomeRoutePattern
-import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination.Player.PlayerRoutePattern
-import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination.Search.SearchRoutePattern
-import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination.Trend.TrendRoutePattern
+import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination.Home
+import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination.Player
+import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination.Search
+import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination.Trend
 
 private const val MainNavGraph = "main_nav_graph"
 
@@ -26,13 +26,13 @@ fun NavController.createMainNavGraph() {
 
 fun NavController.createMainBottomNavGraph() {
     graph = createGraph(
-        startDestination = HomeRoutePattern()
+        startDestination = Home.route
     ) {
-        fragment<HomeFragment>(route = HomeRoutePattern())
-        fragment<SearchFragment>(route = SearchRoutePattern())
-        activity(route = PlayerRoutePattern()) {
+        fragment<HomeFragment>(route = Home.routePattern.value)
+        fragment<SearchFragment>(route = Search.routePattern.value)
+        activity(route = Player.routePattern.value) {
             this.activityClass = PlayerActivity::class
         }
-        fragment<TrendFragment>(route = TrendRoutePattern())
+        fragment<TrendFragment>(route = Trend.routePattern.value)
     }
 }

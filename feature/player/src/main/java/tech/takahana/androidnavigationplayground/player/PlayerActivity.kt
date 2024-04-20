@@ -52,7 +52,7 @@ class PlayerActivity : AppCompatActivity() {
         }
     }
 
-    private fun navigateTo(destination: MyAppScreenDestination<*>) {
+    private fun navigateTo(destination: MyAppScreenDestination) {
         screenNavigator.navigate(destination)
     }
 }
@@ -60,7 +60,7 @@ class PlayerActivity : AppCompatActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun PlayerScreen(
-    onClick: (MyAppScreenDestination<*>) -> Unit,
+    onClick: (MyAppScreenDestination) -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -80,7 +80,7 @@ internal fun PlayerScreen(
 
 @Composable
 internal fun PlayerContents(
-    onClick: (MyAppScreenDestination<*>) -> Unit,
+    onClick: (MyAppScreenDestination) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(

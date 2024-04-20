@@ -31,7 +31,7 @@ class NavigationRobot @Inject constructor(
         }
     }
 
-    fun switchBottomNavigationItem(from: MyAppScreenDestination<*>, to: MyAppScreenDestination<*>) {
+    fun switchBottomNavigationItem(from: MyAppScreenDestination, to: MyAppScreenDestination) {
         onView(withId(from.bottomNavMenuId())).check(matches(isSelected()))
         onView(withId(to.bottomNavMenuId())).check(matches(isNotSelected()))
 
@@ -85,7 +85,7 @@ class NavigationRobot @Inject constructor(
         )
     }
 
-    private fun navigateTo(destination: MyAppScreenDestination<*>) {
+    private fun navigateTo(destination: MyAppScreenDestination) {
         screenNavigationDispatcher.dispatch(destination)
         mainFragment.navHostFragment.childFragmentManager.executePendingTransactions()
     }
@@ -94,7 +94,7 @@ class NavigationRobot @Inject constructor(
         block()
     }
 
-    private fun MyAppScreenDestination<*>.bottomNavMenuId(): Int {
+    private fun MyAppScreenDestination.bottomNavMenuId(): Int {
         return when (this) {
             MyAppScreenDestination.Home -> bottomNavMenuHomeId
             MyAppScreenDestination.Search -> bottomNavMenuSearchId

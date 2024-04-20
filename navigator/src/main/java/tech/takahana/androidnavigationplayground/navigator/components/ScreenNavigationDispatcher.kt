@@ -21,7 +21,7 @@ class ScreenNavigationDispatcher(
     private val mutableScreenNavigationRequest = MutableStateFlow<ScreenNavigationRequest?>(null)
     val screenNavigationRequest = mutableScreenNavigationRequest.asStateFlow()
 
-    fun dispatch(destination: ScreenDestination<*>) =
+    fun dispatch(destination: ScreenDestination) =
         updateRequestDeque {
             addLast(ScreenNavigationRequest(destination))
         }
@@ -43,6 +43,6 @@ class ScreenNavigationDispatcher(
     }
 
     data class ScreenNavigationRequest(
-        val destination: ScreenDestination<*>,
+        val destination: ScreenDestination,
     )
 }

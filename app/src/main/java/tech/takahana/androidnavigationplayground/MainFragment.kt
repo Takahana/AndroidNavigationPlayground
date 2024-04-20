@@ -54,7 +54,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         )
     }
 
-    private fun MyAppScreenDestination.Companion.of(@IdRes itemId: Int): MyAppScreenDestination<*>? {
+    private fun MyAppScreenDestination.Companion.of(@IdRes itemId: Int): MyAppScreenDestination? {
         return when (itemId) {
             R.id.menu_main_bottom_home -> MyAppScreenDestination.Home
             R.id.menu_main_bottom_search -> MyAppScreenDestination.Search
