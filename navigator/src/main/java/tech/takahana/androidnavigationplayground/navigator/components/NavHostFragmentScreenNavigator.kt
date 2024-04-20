@@ -23,10 +23,9 @@ class NavHostFragmentScreenNavigator(
     private var navigationRequestJob: Job? = null
 
     override fun navigate(destination: ScreenDestination) {
-        val location = destination.getLocation()
         navController.navigate(
             route = destination.route,
-            navOptions = location?.createNavOptions(navController),
+            navOptions = destination.location?.createNavOptions(navController),
         )
     }
 

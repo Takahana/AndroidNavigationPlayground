@@ -4,5 +4,6 @@ interface ScreenDestination {
 
     val route: String
 
-    fun getLocation(): ScreenLocation? = null
+    val location: ScreenLocation?
+        get() = null
 }

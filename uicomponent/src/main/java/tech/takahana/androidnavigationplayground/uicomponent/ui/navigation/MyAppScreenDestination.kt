@@ -11,7 +11,7 @@ sealed interface MyAppScreenDestination : ScreenDestination {
 
         override val route: String = "home"
 
-        override fun getLocation() = BottomNavigationItem
+        override val location = BottomNavigationItem
 
         object HomeRoutePattern : RoutePattern {
             override val value: String = "home"
@@ -22,7 +22,7 @@ sealed interface MyAppScreenDestination : ScreenDestination {
 
         override val route: String = "search"
 
-        override fun getLocation() = BottomNavigationItem
+        override val location = BottomNavigationItem
 
         object SearchRoutePattern : RoutePattern {
             override val value: String = "search"
