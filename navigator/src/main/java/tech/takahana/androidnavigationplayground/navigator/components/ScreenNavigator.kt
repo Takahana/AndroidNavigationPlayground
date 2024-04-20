@@ -4,4 +4,6 @@ interface ScreenNavigator {
 
     @Throws(IllegalArgumentException::class)
     fun navigate(destination: ScreenDestination)
+
+    companion object
 }
