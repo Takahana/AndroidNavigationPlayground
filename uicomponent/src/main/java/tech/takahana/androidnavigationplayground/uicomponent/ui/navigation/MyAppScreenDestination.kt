@@ -3,6 +3,7 @@ package tech.takahana.androidnavigationplayground.uicomponent.ui.navigation
 import tech.takahana.androidnavigationplayground.navigator.components.RoutePattern
 import tech.takahana.androidnavigationplayground.navigator.components.ScreenDestination
 import tech.takahana.androidnavigationplayground.navigator.components.locations.BottomNavigationItem
+import tech.takahana.androidnavigationplayground.navigator.components.transitions.Modal
 import tech.takahana.androidnavigationplayground.uicomponent.uimodel.id.TrendIdUiModel
 
 sealed interface MyAppScreenDestination : ScreenDestination {
@@ -32,6 +33,8 @@ sealed interface MyAppScreenDestination : ScreenDestination {
     data object Player : MyAppScreenDestination {
 
         override val route: String = "player"
+
+        override val transition = Modal
 
         object PlayerRoutePattern : RoutePattern {
             override val value: String = "player"
