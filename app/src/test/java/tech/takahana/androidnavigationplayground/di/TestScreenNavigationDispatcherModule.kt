@@ -6,7 +6,7 @@ import dagger.hilt.components.SingletonComponent
 import dagger.hilt.testing.TestInstallIn
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
-import tech.takahana.androidnavigationplayground.navigator.components.ScreenNavigationDispatcher
+import tech.takahana.androidnavigationplayground.navigator.components.ScreenNavigationRequestDispatcher
 import javax.inject.Singleton
 
 @TestInstallIn(
@@ -19,7 +19,7 @@ class TestScreenNavigationDispatcherModule {
     @OptIn(ExperimentalCoroutinesApi::class)
     @Singleton
     @Provides
-    fun provideScreenNavigationDispatcher(): ScreenNavigationDispatcher {
-        return ScreenNavigationDispatcher(UnconfinedTestDispatcher())
+    fun provideScreenNavigationDispatcher(): ScreenNavigationRequestDispatcher {
+        return ScreenNavigationRequestDispatcher(UnconfinedTestDispatcher())
     }
 }

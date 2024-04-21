@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 import java.lang.ref.WeakReference
 
 class NavHostFragmentScreenNavigator(
-    private val dispatcher: ScreenNavigationDispatcher,
+    private val dispatcher: ScreenNavigationRequestDispatcher,
     private val navController: NavController,
     private val lifecycleOwner: LifecycleOwner,
     private val activity: WeakReference<Activity>
@@ -74,7 +74,7 @@ class NavHostFragmentScreenNavigator(
         activity.startActivity(intent)
     }
     class Factory(
-        private val dispatcher: ScreenNavigationDispatcher,
+        private val dispatcher: ScreenNavigationRequestDispatcher,
     ) {
         fun create(
             navController: NavController,

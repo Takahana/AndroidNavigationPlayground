@@ -7,7 +7,7 @@ import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.components.SingletonComponent
 import tech.takahana.androidnavigationplayground.navigator.components.DefaultScreenNavigator
 import tech.takahana.androidnavigationplayground.navigator.components.NavHostFragmentScreenNavigator
-import tech.takahana.androidnavigationplayground.navigator.components.ScreenNavigationDispatcher
+import tech.takahana.androidnavigationplayground.navigator.components.ScreenNavigationRequestDispatcher
 import tech.takahana.androidnavigationplayground.navigator.components.ScreenNavigator
 import javax.inject.Singleton
 
@@ -17,8 +17,8 @@ class ScreenNavigationDispatcherModule {
 
     @Singleton
     @Provides
-    fun provideScreenNavigationDispatcher(): ScreenNavigationDispatcher {
-        return ScreenNavigationDispatcher()
+    fun provideScreenNavigationDispatcher(): ScreenNavigationRequestDispatcher {
+        return ScreenNavigationRequestDispatcher()
     }
 }
 
@@ -27,15 +27,15 @@ class ScreenNavigationDispatcherModule {
 class ScreenNavigatorModule {
     @Provides
     fun provideScreenNavigator(
-        screenNavigationDispatcher: ScreenNavigationDispatcher,
+        screenNavigationRequestDispatcher: ScreenNavigationRequestDispatcher,
     ): ScreenNavigator {
-        return DefaultScreenNavigator(screenNavigationDispatcher)
+        return DefaultScreenNavigator(screenNavigationRequestDispatcher)
     }
 
     @Provides
     fun provideNavHostFragmentScreenNavigatorFactory(
-        screenNavigationDispatcher: ScreenNavigationDispatcher,
+        screenNavigationRequestDispatcher: ScreenNavigationRequestDispatcher,
     ): NavHostFragmentScreenNavigator.Factory {
-        return NavHostFragmentScreenNavigator.Factory(screenNavigationDispatcher)
+        return NavHostFragmentScreenNavigator.Factory(screenNavigationRequestDispatcher)
     }
 }

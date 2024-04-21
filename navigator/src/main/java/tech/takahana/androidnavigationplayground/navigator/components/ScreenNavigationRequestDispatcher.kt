@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
-class ScreenNavigationDispatcher(
+class ScreenNavigationRequestDispatcher(
     dispatcher: CoroutineDispatcher = Dispatchers.Main,
     private val coroutineScope: CoroutineScope = CoroutineScope(dispatcher + SupervisorJob()),
 ) {

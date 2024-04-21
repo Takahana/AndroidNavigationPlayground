@@ -9,7 +9,7 @@ import androidx.test.espresso.matcher.ViewMatchers.isSelected
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import com.google.common.truth.Truth.assertThat
 import tech.takahana.androidnavigationplayground.home.HomeFragment
-import tech.takahana.androidnavigationplayground.navigator.components.ScreenNavigationDispatcher
+import tech.takahana.androidnavigationplayground.navigator.components.ScreenNavigationRequestDispatcher
 import tech.takahana.androidnavigationplayground.search.SearchFragment
 import tech.takahana.androidnavigationplayground.trend.TrendFragment
 import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination
@@ -17,7 +17,7 @@ import tech.takahana.androidnavigationplayground.uicomponent.uimodel.id.TrendIdU
 import javax.inject.Inject
 
 class NavigationRobot @Inject constructor(
-    private val screenNavigationDispatcher: ScreenNavigationDispatcher,
+    private val screenNavigationRequestDispatcher: ScreenNavigationRequestDispatcher,
 ) {
 
     private val bottomNavMenuHomeId = R.id.menu_main_bottom_home
@@ -86,7 +86,7 @@ class NavigationRobot @Inject constructor(
     }
 
     private fun navigateTo(destination: MyAppScreenDestination) {
-        screenNavigationDispatcher.dispatch(destination)
+        screenNavigationRequestDispatcher.dispatch(destination)
         mainFragment.navHostFragment.childFragmentManager.executePendingTransactions()
     }
 
