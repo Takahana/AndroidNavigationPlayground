@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 import java.lang.ref.WeakReference
 
 class NavHostFragmentScreenNavigator(
-    private val dispatcher: ScreenNavigationRequestDispatcher,
+    private val navigationRequestDispatcher: ScreenNavigationRequestDispatcher,
     private val navController: NavController,
     private val lifecycleOwner: LifecycleOwner,
     private val activity: WeakReference<Activity>
@@ -47,7 +47,7 @@ class NavHostFragmentScreenNavigator(
         navigationRequestJob?.cancel()
         navigationRequestJob = with(lifecycleOwner) {
             lifecycleScope.launch {
-                dispatcher.screenNavigationRequest
+                navigationRequestDispatcher.screenNavigationRequest
                     .filterNotNull()
                     .collect { request -> handleRequest(request) }
             }
@@ -59,7 +59,7 @@ class NavHostFragmentScreenNavigator(
         if (navController.graph.contains(destination.route)) {
             if (lifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
                 navigate(destination)
-                dispatcher.responded(request)
+                navigationRequestDispatcher.responded(request)
             } else {
                 moveToForeground()
             }
@@ -74,7 +74,7 @@ class NavHostFragmentScreenNavigator(
         activity.startActivity(intent)
     }
     class Factory(
-        private val dispatcher: ScreenNavigationRequestDispatcher,
+        private val navigationRequestDispatcher: ScreenNavigationRequestDispatcher,
     ) {
         fun create(
             navController: NavController,
@@ -82,7 +82,7 @@ class NavHostFragmentScreenNavigator(
             activity: Activity,
         ): NavHostFragmentScreenNavigator {
             return NavHostFragmentScreenNavigator(
-                dispatcher = dispatcher,
+                navigationRequestDispatcher = navigationRequestDispatcher,
                 navController = navController,
                 lifecycleOwner = lifecycleOwner,
                 activity = WeakReference(activity),

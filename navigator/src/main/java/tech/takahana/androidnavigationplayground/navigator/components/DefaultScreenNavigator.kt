@@ -1,9 +1,9 @@
 package tech.takahana.androidnavigationplayground.navigator.components
 
 class DefaultScreenNavigator(
-    private val dispatcher: ScreenNavigationRequestDispatcher,
+    private val navigationRequestDispatcher: ScreenNavigationRequestDispatcher,
 ) : ScreenNavigator {
     override fun navigate(destination: ScreenDestination) {
-        dispatcher.dispatch(destination)
+        navigationRequestDispatcher.dispatch(destination)
     }
 }
