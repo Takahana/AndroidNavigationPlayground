@@ -22,7 +22,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
+import tech.takahana.androidnavigationplayground.navigator.components.ScreenNavigationMessage
 import tech.takahana.androidnavigationplayground.navigator.components.ScreenNavigator
 import tech.takahana.androidnavigationplayground.navigator.components.applyPopAnimationsToPendingTransition
 import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination
@@ -51,15 +58,40 @@ class PlayerActivity : AppCompatActivity() {
                 }
             }
         }
+
+        lifecycleScope.launch {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                screenNavigator.screenNavigationMessage.onEach { message ->
+                    onReceivedNavMessage(message)
+                }.launchIn(this)
+            }
+        }
     }
 
     private fun navigateTo(destination: MyAppScreenDestination) {
-        screenNavigator.navigate(destination)
+        screenNavigator.navigate(
+            destination,
+            NAV_REQUEST_TAG,
+        )
     }
 
     override fun finish() {
         super.finish()
         ScreenNavigator.applyPopAnimationsToPendingTransition(this)
+    }
+
+    private fun onReceivedNavMessage(message: ScreenNavigationMessage) {
+        if (message.requestTag != NAV_REQUEST_TAG) return
+        when (message.message) {
+            ScreenNavigationMessage.Message.ShouldCloseScreenSentRequest -> {
+                finish()
+                screenNavigator.respondedTo(message)
+            }
+        }
+    }
+
+    companion object {
+        private const val NAV_REQUEST_TAG = "NAV_REQUEST_TAG_ON_PLAYER_ACTIVITY"
     }
 }
 
