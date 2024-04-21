@@ -114,6 +114,17 @@ internal fun HomeContents(
                 modifier = itemModifier,
             )
         }
+        item {
+            HomeContent(
+                content = {
+                    Text(text = "Open Purchase")
+                },
+                onClick = {
+                    onClick(MyAppScreenDestination.Purchase)
+                },
+                modifier = itemModifier,
+            )
+        }
     }
 }
 

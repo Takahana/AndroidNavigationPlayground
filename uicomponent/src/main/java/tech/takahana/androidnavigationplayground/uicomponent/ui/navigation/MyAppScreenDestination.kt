@@ -56,5 +56,16 @@ sealed interface MyAppScreenDestination : ScreenDestination {
         }
     }
 
+    data object Purchase : MyAppScreenDestination {
+
+        override val route: String = "purchase"
+
+        override val transition = Modal
+
+        object PurchaseRoutePattern : RoutePattern {
+            override val value: String = "purchase"
+        }
+    }
+
     companion object
 }

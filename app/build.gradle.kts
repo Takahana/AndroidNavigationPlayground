@@ -62,6 +62,7 @@ dependencies {
     implementation(project(":feature:search"))
     implementation(project(":feature:player"))
     implementation(project(":feature:trend"))
+    implementation(project(":feature:purchase"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
