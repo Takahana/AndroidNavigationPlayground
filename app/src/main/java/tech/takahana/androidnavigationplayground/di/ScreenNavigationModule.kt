@@ -17,7 +17,7 @@ class ScreenNavigationDispatcherModule {
 
     @Singleton
     @Provides
-    fun provideScreenNavigationDispatcher(): ScreenNavigationRequestDispatcher {
+    fun provideScreenNavigationRequestDispatcher(): ScreenNavigationRequestDispatcher {
         return ScreenNavigationRequestDispatcher()
     }
 }
