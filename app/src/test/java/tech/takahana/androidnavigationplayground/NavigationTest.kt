@@ -87,4 +87,16 @@ class NavigationTest {
         closePlayerScreen()
         verifyDisplayedHomeScreen()
     }
+
+    @Test
+    fun navigateToStackableModalScreenOfDialogFragment() = navigationRobot {
+        bootScreen()
+        verifyDisplayedHomeScreen()
+
+        navigateToPurchaseScreen()
+        verifyDisplayedPurchaseScreen()
+
+        navigateUp()
+        verifyDisplayedHomeScreen()
+    }
 }

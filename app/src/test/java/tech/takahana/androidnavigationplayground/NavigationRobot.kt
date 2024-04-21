@@ -15,11 +15,14 @@ import org.robolectric.Shadows.shadowOf
 import tech.takahana.androidnavigationplayground.home.HomeFragment
 import tech.takahana.androidnavigationplayground.navigator.components.ScreenNavigationRequestDispatcher
 import tech.takahana.androidnavigationplayground.player.PlayerActivity
+import tech.takahana.androidnavigationplayground.purchase.PurchaseBottomSheetDialogFragment
+import tech.takahana.androidnavigationplayground.purchase.PurchaseFragment
 import tech.takahana.androidnavigationplayground.search.SearchFragment
 import tech.takahana.androidnavigationplayground.trend.TrendFragment
 import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination
 import tech.takahana.androidnavigationplayground.uicomponent.uimodel.id.TrendIdUiModel
 import javax.inject.Inject
+import tech.takahana.androidnavigationplayground.purchase.R.id as PurchaseRId
 
 class NavigationRobot @Inject constructor(
     private val screenNavigationRequestDispatcher: ScreenNavigationRequestDispatcher,
@@ -64,6 +67,11 @@ class NavigationRobot @Inject constructor(
         assertThat(args.getString(MyAppScreenDestination.Trend.Key.TREND_ID)).isEqualTo(trendId)
     }
 
+    fun verifyDisplayedPurchaseScreen() {
+        assertThat(fragmentOnPurchaseBottomSheetDialogFragment())
+            .isInstanceOf(PurchaseFragment::class.java)
+    }
+
     fun verifyDisplayedPlayerScreen() {
         val nextStartedActivity = shadowOf(RuntimeEnvironment.getApplication()).nextStartedActivity
         assertThat(nextStartedActivity.component?.className).isEqualTo(PlayerActivity::class.java.name)
@@ -82,6 +90,12 @@ class NavigationRobot @Inject constructor(
             MyAppScreenDestination.Player
         )
         moveMainActivityToBackground()
+    }
+
+    fun navigateToPurchaseScreen() {
+        navigateTo(
+            MyAppScreenDestination.Purchase
+        )
     }
 
     fun verifySelectedBottomNavigationItemOfHome() {
@@ -104,6 +118,16 @@ class NavigationRobot @Inject constructor(
     private fun fragmentOnMainFragmentContainer(): Fragment {
         return requireNotNull(
             mainFragment.navHostFragment.childFragmentManager.findFragmentById(R.id.main_fragment_container)
+        )
+    }
+
+    private fun fragmentOnPurchaseBottomSheetDialogFragment(): Fragment {
+        return requireNotNull(
+            mainFragment.navHostFragment.childFragmentManager.fragments
+                .first { it is PurchaseBottomSheetDialogFragment }
+                .childFragmentManager.findFragmentById(
+                    PurchaseRId.bottom_sheet_dialog_fragment_purchase_container
+                )
         )
     }
 
