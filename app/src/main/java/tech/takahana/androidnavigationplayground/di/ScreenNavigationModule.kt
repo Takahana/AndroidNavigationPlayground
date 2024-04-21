@@ -34,15 +34,23 @@ class ScreenNavigationDispatcherModule {
 class ScreenNavigatorModule {
     @Provides
     fun provideScreenNavigator(
+        screenNavigationMessageDispatcher: ScreenNavigationMessageDispatcher,
         screenNavigationRequestDispatcher: ScreenNavigationRequestDispatcher,
     ): ScreenNavigator {
-        return DefaultScreenNavigator(screenNavigationRequestDispatcher)
+        return DefaultScreenNavigator(
+            screenNavigationMessageDispatcher,
+            screenNavigationRequestDispatcher,
+        )
     }
 
     @Provides
     fun provideNavHostFragmentScreenNavigatorFactory(
+        screenNavigationMessageDispatcher: ScreenNavigationMessageDispatcher,
         screenNavigationRequestDispatcher: ScreenNavigationRequestDispatcher,
     ): NavHostFragmentScreenNavigator.Factory {
-        return NavHostFragmentScreenNavigator.Factory(screenNavigationRequestDispatcher)
+        return NavHostFragmentScreenNavigator.Factory(
+            screenNavigationMessageDispatcher,
+            screenNavigationRequestDispatcher,
+        )
     }
 }
