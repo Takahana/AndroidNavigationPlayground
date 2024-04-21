@@ -24,53 +24,53 @@ class NavigationTest {
     @Test
     fun switchBottomNavigationItemBySelectItem() = navigationRobot {
         bootScreen()
-        displayingHomeScreen()
+        verifyDisplayedHomeScreen()
 
         navigateToTrendScreen("trendId")
-        displayingTrendScreen("trendId")
-        selectingBottomNavigationItemOfHome()
+        verifyDisplayedTrendScreen("trendId")
+        verifySelectedBottomNavigationItemOfHome()
 
         switchBottomNavigationItem(
             from = MyAppScreenDestination.Home,
             to = MyAppScreenDestination.Search,
         )
-        displayingSearchScreen()
+        verifyDisplayedSearchScreen()
 
         switchBottomNavigationItem(
             from = MyAppScreenDestination.Search,
             to = MyAppScreenDestination.Home,
         )
-        displayingTrendScreen("trendId")
-        selectingBottomNavigationItemOfHome()
+        verifyDisplayedTrendScreen("trendId")
+        verifySelectedBottomNavigationItemOfHome()
     }
 
     @Test
     fun switchBottomNavigationItemByNavigateUp() = navigationRobot {
         bootScreen()
-        displayingHomeScreen()
+        verifyDisplayedHomeScreen()
 
         navigateToTrendScreen("trendId")
-        displayingTrendScreen("trendId")
-        selectingBottomNavigationItemOfHome()
+        verifyDisplayedTrendScreen("trendId")
+        verifySelectedBottomNavigationItemOfHome()
 
         switchBottomNavigationItem(
             from = MyAppScreenDestination.Home,
             to = MyAppScreenDestination.Search,
         )
-        displayingSearchScreen()
+        verifyDisplayedSearchScreen()
 
         navigateUp()
-        displayingHomeScreen()
+        verifyDisplayedHomeScreen()
     }
 
     @Test
     fun navigateToStackableScreenOnBottomNavigation() = navigationRobot {
         bootScreen()
-        displayingHomeScreen()
+        verifyDisplayedHomeScreen()
         navigateToTrendScreen("trendId")
-        displayingTrendScreen("trendId")
-        selectingBottomNavigationItemOfHome()
+        verifyDisplayedTrendScreen("trendId")
+        verifySelectedBottomNavigationItemOfHome()
         navigateUp()
-        displayingHomeScreen()
+        verifyDisplayedHomeScreen()
     }
 }
