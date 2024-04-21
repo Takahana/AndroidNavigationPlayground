@@ -86,7 +86,7 @@ class NavigationRobot @Inject constructor(
     }
 
     private fun navigateTo(destination: MyAppScreenDestination) {
-        screenNavigationRequestDispatcher.dispatch(destination)
+        screenNavigationRequestDispatcher.dispatch(destination, null)
         mainFragment.navHostFragment.childFragmentManager.executePendingTransactions()
     }
 
