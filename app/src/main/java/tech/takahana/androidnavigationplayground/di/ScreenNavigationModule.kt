@@ -7,6 +7,7 @@ import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.components.SingletonComponent
 import tech.takahana.androidnavigationplayground.navigator.components.DefaultScreenNavigator
 import tech.takahana.androidnavigationplayground.navigator.components.NavHostFragmentScreenNavigator
+import tech.takahana.androidnavigationplayground.navigator.components.ScreenNavigationMessageDispatcher
 import tech.takahana.androidnavigationplayground.navigator.components.ScreenNavigationRequestDispatcher
 import tech.takahana.androidnavigationplayground.navigator.components.ScreenNavigator
 import javax.inject.Singleton
@@ -19,6 +20,12 @@ class ScreenNavigationDispatcherModule {
     @Provides
     fun provideScreenNavigationRequestDispatcher(): ScreenNavigationRequestDispatcher {
         return ScreenNavigationRequestDispatcher()
+    }
+
+    @Singleton
+    @Provides
+    fun provideScreenNavigationMessageDispatcher(): ScreenNavigationMessageDispatcher {
+        return ScreenNavigationMessageDispatcher()
     }
 }
 
