@@ -67,9 +67,11 @@ class NavigationTest {
     fun navigateToStackableScreenOnBottomNavigation() = navigationRobot {
         bootScreen()
         verifyDisplayedHomeScreen()
+
         navigateToTrendScreen("trendId")
         verifyDisplayedTrendScreen("trendId")
         verifySelectedBottomNavigationItemOfHome()
+
         navigateUp()
         verifyDisplayedHomeScreen()
     }
