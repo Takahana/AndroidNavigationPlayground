@@ -75,4 +75,16 @@ class NavigationTest {
         navigateUp()
         verifyDisplayedHomeScreen()
     }
+
+    @Test
+    fun navigateToStackableModalScreenOfActivity() = navigationRobot {
+        bootScreen()
+        verifyDisplayedHomeScreen()
+
+        navigateToPlayerScreen()
+        verifyDisplayedPlayerScreen()
+
+        closePlayerScreen()
+        verifyDisplayedHomeScreen()
+    }
 }
