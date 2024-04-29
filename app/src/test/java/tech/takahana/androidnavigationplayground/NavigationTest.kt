@@ -112,4 +112,16 @@ class NavigationTest {
         navigateToTrendScreen("trendId")
         verifyDisplayedTrendScreen("trendId")
     }
+
+    @Test
+    fun navigateToStackableScreenFromModalScreenOfDialogFragment() = navigationRobot {
+        bootScreen()
+        verifyDisplayedHomeScreen()
+
+        navigateToPurchaseScreen()
+        verifyDisplayedPurchaseScreen()
+
+        navigateToTrendScreen("trendId")
+        verifyDisplayedTrendScreen("trendId")
+    }
 }
