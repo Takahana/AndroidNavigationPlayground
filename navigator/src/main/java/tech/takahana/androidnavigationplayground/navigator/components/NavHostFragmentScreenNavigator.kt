@@ -17,6 +17,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
+import tech.takahana.androidnavigationplayground.navigator.R
 import tech.takahana.androidnavigationplayground.navigator.components.ScreenNavigationMessage.Message.ShouldOpenDialogFragmentOnScreenSentRequest
 import tech.takahana.androidnavigationplayground.navigator.components.ScreenNavigationMessage.Message.ShouldStartActivityOnScreenSentRequest
 import tech.takahana.androidnavigationplayground.navigator.components.transitions.Modal
@@ -35,6 +36,18 @@ class NavHostFragmentScreenNavigator(
 
     override val screenNavigationMessage: Flow<ScreenNavigationMessage> =
         navigationMessageDispatcher.screenNavigationMessage.filterNotNull()
+
+    init {
+        lifecycleOwner.lifecycle.addObserver(object : DefaultLifecycleObserver {
+            override fun onStart(owner: LifecycleOwner) {
+                subscribeScreenNavigationRequest()
+            }
+
+            override fun onResume(owner: LifecycleOwner) {
+                handleCurrentRequest()
+            }
+        })
+    }
 
     override fun navigate(destination: ScreenDestination) {
         navController.navigate(
@@ -57,12 +70,11 @@ class NavHostFragmentScreenNavigator(
         navigationMessageDispatcher.responded(message)
     }
 
-    init {
-        lifecycleOwner.lifecycle.addObserver(object : DefaultLifecycleObserver {
-            override fun onStart(owner: LifecycleOwner) {
-                subscribeScreenNavigationRequest()
-            }
-        })
+    private fun handleCurrentRequest() {
+        val request = navigationRequestDispatcher.screenNavigationRequest.value
+        if (request != null) {
+            handleRequest(request)
+        }
     }
 
     private fun subscribeScreenNavigationRequest() {
@@ -93,10 +105,7 @@ class NavHostFragmentScreenNavigator(
     ) {
         when (request.destination.transition) {
             is Modal -> dispatchOpenScreenMessage(request)
-            else -> {
-                dispatchCloseScreenMessage(request)
-                moveToForeground()
-            }
+            else -> moveToForeground()
         }
     }
 
@@ -140,23 +149,16 @@ class NavHostFragmentScreenNavigator(
         navigationRequestDispatcher.responded(request)
     }
 
-    private fun dispatchCloseScreenMessage(
-        request: ScreenNavigationRequest,
-    ) {
-        navigationMessageDispatcher.dispatch(
-            ScreenNavigationMessage(
-                tag = request.requestTag ?: return,
-                message = ScreenNavigationMessage.Message.ShouldCloseScreenSentRequest,
-            )
-        )
-    }
-
     private fun moveToForeground() {
         val activity = activity.get() ?: return
         val intent = Intent(activity, activity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
         }
         activity.startActivity(intent)
+        activity.overridePendingTransition(
+            R.anim.modal_enter_anim,
+            R.anim.modal_exit_anim,
+        )
     }
 
     private fun createDialogFragment(
