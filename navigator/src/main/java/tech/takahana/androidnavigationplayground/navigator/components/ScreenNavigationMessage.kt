@@ -1,5 +1,6 @@
 package tech.takahana.androidnavigationplayground.navigator.components
 
+import androidx.annotation.AnimRes
 import androidx.fragment.app.DialogFragment
 
 data class ScreenNavigationMessage(
@@ -13,6 +14,14 @@ data class ScreenNavigationMessage(
         data class ShouldOpenDialogFragmentOnScreenSentRequest(
             val dialogFragment: DialogFragment,
             val tag: String,
+        ) : Message
+
+        data class ShouldStartActivityOnScreenSentRequest(
+            val className: String,
+            @AnimRes val enterAnim: Int?,
+            @AnimRes val exitAnim: Int?,
+            @AnimRes val popEnterAnim: Int?,
+            @AnimRes val popExitAnim: Int?,
         ) : Message
     }
 }

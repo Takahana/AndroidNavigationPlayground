@@ -17,5 +17,9 @@ interface ScreenNavigator {
 
     fun respondedTo(message: ScreenNavigationMessage)
 
-    companion object
+    companion object {
+        internal const val KEY_NAVIGATED_NOT_ON_GRAPH = "key_navigated_not_on_graph"
+        internal const val KEY_POP_ENTER_ANIM = "key_pop_enter_anim"
+        internal const val KEY_POP_EXIT_ANIM = "key_pop_exit_anim"
+    }
 }

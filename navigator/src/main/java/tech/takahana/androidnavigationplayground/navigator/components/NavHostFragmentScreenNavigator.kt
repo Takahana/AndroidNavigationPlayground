@@ -8,6 +8,7 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.ActivityNavigator
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.contains
@@ -17,6 +18,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 import tech.takahana.androidnavigationplayground.navigator.components.ScreenNavigationMessage.Message.ShouldOpenDialogFragmentOnScreenSentRequest
+import tech.takahana.androidnavigationplayground.navigator.components.ScreenNavigationMessage.Message.ShouldStartActivityOnScreenSentRequest
 import tech.takahana.androidnavigationplayground.navigator.components.transitions.Modal
 import java.lang.ref.WeakReference
 
@@ -111,6 +113,24 @@ class NavHostFragmentScreenNavigator(
                             message = ShouldOpenDialogFragmentOnScreenSentRequest(
                                 dialogFragment = dialogFragment,
                                 tag = request.requestTag,
+                            ),
+                        )
+                    )
+                }
+            }
+
+            is ActivityNavigator.Destination -> {
+                val className = node.component?.className
+                if (className != null && request.requestTag != null) {
+                    navigationMessageDispatcher.dispatch(
+                        ScreenNavigationMessage(
+                            requestTag = request.requestTag,
+                            message = ShouldStartActivityOnScreenSentRequest(
+                                className = className,
+                                enterAnim = request.destination.transition?.enterAnim,
+                                exitAnim = request.destination.transition?.exitAnim,
+                                popEnterAnim = request.destination.transition?.popEnterAnim,
+                                popExitAnim = request.destination.transition?.popExitAnim,
                             ),
                         )
                     )
