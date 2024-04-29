@@ -8,7 +8,6 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.withResumed
 import androidx.navigation.ActivityNavigator
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
@@ -34,6 +33,7 @@ class NavHostFragmentScreenNavigator(
 ) : ScreenNavigator {
 
     private var navigationRequestJob: Job? = null
+    private var pendingRequest: ScreenNavigationRequest? = null
 
     override val screenNavigationMessage: Flow<ScreenNavigationMessage> =
         navigationMessageDispatcher.screenNavigationMessage.filterNotNull()
@@ -42,7 +42,11 @@ class NavHostFragmentScreenNavigator(
         lifecycleOwner.lifecycle.addObserver(object : DefaultLifecycleObserver {
             override fun onStart(owner: LifecycleOwner) {
                 subscribeScreenNavigationRequest()
-                handleCurrentRequest()
+            }
+
+            override fun onResume(owner: LifecycleOwner) {
+                super.onResume(owner)
+                handlePendingRequest()
             }
         })
     }
@@ -68,15 +72,10 @@ class NavHostFragmentScreenNavigator(
         navigationMessageDispatcher.responded(message)
     }
 
-    private fun handleCurrentRequest() {
-        val request = navigationRequestDispatcher.screenNavigationRequest.value
-        if (request != null) {
-            lifecycleOwner.lifecycleScope.launch {
-                lifecycleOwner.lifecycle.withResumed {
-                    handleRequest(request)
-                }
-            }
-        }
+    private fun handlePendingRequest() {
+        val request = pendingRequest ?: return
+        pendingRequest = null
+        handleRequest(request)
     }
 
     private fun subscribeScreenNavigationRequest() {
@@ -103,7 +102,10 @@ class NavHostFragmentScreenNavigator(
                     navigationRequestDispatcher.responded(request)
                 }
 
-                else -> moveToForeground()
+                else -> {
+                    pendingRequest = request
+                    moveToForeground()
+                }
             }
         }
     }
