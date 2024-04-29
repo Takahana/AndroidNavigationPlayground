@@ -9,8 +9,6 @@ data class ScreenNavigationMessage(
 ) {
 
     sealed interface Message {
-        data object ShouldCloseScreenSentRequest : Message
-
         data class ShouldOpenDialogFragmentOnScreenSentRequest(
             val dialogFragment: DialogFragment,
             val tag: String,

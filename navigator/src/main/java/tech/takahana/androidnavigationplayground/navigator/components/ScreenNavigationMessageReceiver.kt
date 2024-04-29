@@ -36,10 +36,6 @@ class ScreenNavigationMessageReceiver(
     ) {
         if (message.tag != requestTag) return
         when (message.message) {
-            ScreenNavigationMessage.Message.ShouldCloseScreenSentRequest -> {
-                activity.finish()
-            }
-
             is ScreenNavigationMessage.Message.ShouldOpenDialogFragmentOnScreenSentRequest -> {
                 val dialogFragment = message.message.dialogFragment
                 dialogFragment.show(

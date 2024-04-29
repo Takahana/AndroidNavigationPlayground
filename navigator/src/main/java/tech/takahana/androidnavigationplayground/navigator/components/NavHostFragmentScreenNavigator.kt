@@ -8,6 +8,7 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.withResumed
 import androidx.navigation.ActivityNavigator
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
@@ -41,9 +42,6 @@ class NavHostFragmentScreenNavigator(
         lifecycleOwner.lifecycle.addObserver(object : DefaultLifecycleObserver {
             override fun onStart(owner: LifecycleOwner) {
                 subscribeScreenNavigationRequest()
-            }
-
-            override fun onResume(owner: LifecycleOwner) {
                 handleCurrentRequest()
             }
         })
@@ -73,7 +71,11 @@ class NavHostFragmentScreenNavigator(
     private fun handleCurrentRequest() {
         val request = navigationRequestDispatcher.screenNavigationRequest.value
         if (request != null) {
-            handleRequest(request)
+            lifecycleOwner.lifecycleScope.launch {
+                lifecycleOwner.lifecycle.withResumed {
+                    handleRequest(request)
+                }
+            }
         }
     }
 
@@ -91,7 +93,7 @@ class NavHostFragmentScreenNavigator(
     private fun handleRequest(request: ScreenNavigationRequest) {
         val destination = request.destination
         if (navController.graph.contains(destination.route)) {
-            if (lifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
+            if (lifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
                 navigate(destination)
                 navigationRequestDispatcher.responded(request)
             } else {
