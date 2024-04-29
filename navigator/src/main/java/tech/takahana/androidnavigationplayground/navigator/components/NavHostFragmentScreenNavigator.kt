@@ -92,22 +92,19 @@ class NavHostFragmentScreenNavigator(
 
     private fun handleRequest(request: ScreenNavigationRequest) {
         val destination = request.destination
-        if (navController.graph.contains(destination.route)) {
-            if (lifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
-                navigate(destination)
-                navigationRequestDispatcher.responded(request)
-            } else {
-                dispatchMessage(request)
-            }
-        }
-    }
+        if (!navController.graph.contains(destination.route)) return
+        if (lifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
+            navigate(destination)
+            navigationRequestDispatcher.responded(request)
+        } else {
+            when (request.destination.transition) {
+                is Modal -> {
+                    dispatchOpenScreenMessage(request)
+                    navigationRequestDispatcher.responded(request)
+                }
 
-    private fun dispatchMessage(
-        request: ScreenNavigationRequest,
-    ) {
-        when (request.destination.transition) {
-            is Modal -> dispatchOpenScreenMessage(request)
-            else -> moveToForeground()
+                else -> moveToForeground()
+            }
         }
     }
 
@@ -148,7 +145,6 @@ class NavHostFragmentScreenNavigator(
                 }
             }
         }
-        navigationRequestDispatcher.responded(request)
     }
 
     private fun moveToForeground() {
