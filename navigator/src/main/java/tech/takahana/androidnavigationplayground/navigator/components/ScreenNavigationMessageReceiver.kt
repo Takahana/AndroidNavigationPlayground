@@ -34,7 +34,7 @@ class ScreenNavigationMessageReceiver(
         message: ScreenNavigationMessage,
         requestTag: String,
     ) {
-        if (message.requestTag != requestTag) return
+        if (message.tag != requestTag) return
         when (message.message) {
             ScreenNavigationMessage.Message.ShouldCloseScreenSentRequest -> {
                 activity.finish()

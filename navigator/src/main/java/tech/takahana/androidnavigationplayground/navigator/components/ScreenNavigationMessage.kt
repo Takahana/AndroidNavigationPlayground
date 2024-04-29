@@ -4,7 +4,7 @@ import androidx.annotation.AnimRes
 import androidx.fragment.app.DialogFragment
 
 data class ScreenNavigationMessage(
-    val requestTag: String,
+    val tag: String,
     val message: Message,
 ) {
 

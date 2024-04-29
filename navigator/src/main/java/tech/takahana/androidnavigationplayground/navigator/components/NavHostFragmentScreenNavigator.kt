@@ -109,7 +109,7 @@ class NavHostFragmentScreenNavigator(
                 if (dialogFragment != null && request.requestTag != null) {
                     navigationMessageDispatcher.dispatch(
                         ScreenNavigationMessage(
-                            requestTag = request.requestTag,
+                            tag = request.requestTag,
                             message = ShouldOpenDialogFragmentOnScreenSentRequest(
                                 dialogFragment = dialogFragment,
                                 tag = request.requestTag,
@@ -124,7 +124,7 @@ class NavHostFragmentScreenNavigator(
                 if (className != null && request.requestTag != null) {
                     navigationMessageDispatcher.dispatch(
                         ScreenNavigationMessage(
-                            requestTag = request.requestTag,
+                            tag = request.requestTag,
                             message = ShouldStartActivityOnScreenSentRequest(
                                 className = className,
                                 enterAnim = request.destination.transition?.enterAnim,
@@ -145,7 +145,7 @@ class NavHostFragmentScreenNavigator(
     ) {
         navigationMessageDispatcher.dispatch(
             ScreenNavigationMessage(
-                requestTag = request.requestTag ?: return,
+                tag = request.requestTag ?: return,
                 message = ScreenNavigationMessage.Message.ShouldCloseScreenSentRequest,
             )
         )
