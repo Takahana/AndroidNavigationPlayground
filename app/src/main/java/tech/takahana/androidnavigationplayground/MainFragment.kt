@@ -32,7 +32,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         navHostFragmentScreenNavigatorFactory.create(
             navController,
             viewLifecycleOwner,
-            requireActivity()
+            requireActivity(),
+            navHostFragment.childFragmentManager,
         )
     }
 

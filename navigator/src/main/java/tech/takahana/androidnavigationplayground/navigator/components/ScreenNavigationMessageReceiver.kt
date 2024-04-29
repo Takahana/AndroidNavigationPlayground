@@ -35,6 +35,15 @@ class ScreenNavigationMessageReceiver(
                 activity.finish()
                 screenNavigator.respondedTo(message)
             }
+
+            is ScreenNavigationMessage.Message.ShouldOpenDialogFragmentOnScreenSentRequest -> {
+                val dialogFragment = message.message.dialogFragment
+                dialogFragment.show(
+                    activity.supportFragmentManager,
+                    message.message.tag,
+                )
+                screenNavigator.respondedTo(message)
+            }
         }
     }
 }
