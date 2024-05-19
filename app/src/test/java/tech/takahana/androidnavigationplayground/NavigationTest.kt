@@ -32,12 +32,12 @@ class NavigationTest {
 
         switchBottomNavigationItem(
             from = MyAppScreenDestination.Home,
-            to = MyAppScreenDestination.Search,
+            to = MyAppScreenDestination.SearchTop,
         )
         verifyDisplayedSearchScreen()
 
         switchBottomNavigationItem(
-            from = MyAppScreenDestination.Search,
+            from = MyAppScreenDestination.SearchTop,
             to = MyAppScreenDestination.Home,
         )
         verifyDisplayedTrendScreen("trendId")
@@ -55,7 +55,7 @@ class NavigationTest {
 
         switchBottomNavigationItem(
             from = MyAppScreenDestination.Home,
-            to = MyAppScreenDestination.Search,
+            to = MyAppScreenDestination.SearchTop,
         )
         verifyDisplayedSearchScreen()
 

@@ -23,7 +23,7 @@ import tech.takahana.androidnavigationplayground.uicomponent.uimodel.id.PlayerId
 import tech.takahana.androidnavigationplayground.uicomponent.uimodel.id.TrendIdUiModel
 
 @Composable
-fun SearchTopScreen(
+fun SearchResultScreen(
     navigateTo: (MyAppScreenDestination) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -31,7 +31,7 @@ fun SearchTopScreen(
         modifier = modifier,
         contentAlignment = Alignment.Center,
     ) {
-        SearchTopContents(
+        SearchResultContents(
             onClick = navigateTo,
             modifier = Modifier.fillMaxSize(),
         )
@@ -39,7 +39,7 @@ fun SearchTopScreen(
 }
 
 @Composable
-internal fun SearchTopContents(
+internal fun SearchResultContents(
     onClick: (MyAppScreenDestination) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -50,32 +50,32 @@ internal fun SearchTopContents(
     ) {
         val itemModifier = Modifier.fillMaxWidth()
         item {
-            SearchTopContent(
+            SearchResultContent(
                 content = {
-                    Text(text = "Open Player 1")
+                    Text(text = "Open Player 2")
                 },
                 onClick = {
                     onClick(
                         MyAppScreenDestination.Player(
-                        PlayerIdUiModel("player1")
+                        PlayerIdUiModel("player2")
                     ))
                 },
                 modifier = itemModifier,
             )
         }
         item {
-            SearchTopContent(
+            SearchResultContent(
                 content = {
-                    Text(text = "Open Trend 1")
+                    Text(text = "Open Trend 2")
                 },
                 onClick = {
-                    onClick(MyAppScreenDestination.Trend(TrendIdUiModel("trend1")))
+                    onClick(MyAppScreenDestination.Trend(TrendIdUiModel("trend2")))
                 },
                 modifier = itemModifier,
             )
         }
         item {
-            SearchTopContent(
+            SearchResultContent(
                 content = {
                     Text(text = "Open Purchase")
                 },
@@ -85,22 +85,11 @@ internal fun SearchTopContents(
                 modifier = itemModifier,
             )
         }
-        item {
-            SearchTopContent(
-                content = {
-                    Text(text = "Open Search Result")
-                },
-                onClick = {
-                    onClick(MyAppScreenDestination.SearchResult)
-                },
-                modifier = itemModifier,
-            )
-        }
     }
 }
 
 @Composable
-internal fun SearchTopContent(
+internal fun SearchResultContent(
     content: @Composable () -> Unit,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -118,14 +107,14 @@ internal fun SearchTopContent(
 
 @Composable
 @Preview
-fun SearchTopScreenPreview() {
+fun SearchResultScreenPreview() {
     AndroidNavigationPlaygroundTheme {
         // A surface container using the 'background' color from the theme
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            SearchTopScreen(
+            SearchResultScreen(
                 navigateTo = {},
                 modifier = Modifier.fillMaxSize(),
             )

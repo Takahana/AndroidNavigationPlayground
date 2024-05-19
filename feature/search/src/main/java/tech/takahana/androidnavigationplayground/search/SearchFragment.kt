@@ -77,10 +77,16 @@ internal fun SearchDisplay(
         NavHost(
             modifier = Modifier.padding(it),
             navController = navController,
-            startDestination = MyAppScreenDestination.Search.SearchRoutePattern.value,
+            startDestination = MyAppScreenDestination.SearchTop.SearchTopRoutePattern.value,
         ) {
-            composable(MyAppScreenDestination.Search.SearchRoutePattern.value) {
+            composable(MyAppScreenDestination.SearchTop.SearchTopRoutePattern.value) {
                 SearchTopScreen(
+                    navigateTo = navigateTo,
+                    modifier = Modifier.fillMaxSize(),
+                )
+            }
+            composable(MyAppScreenDestination.SearchResult.SearchResultRoutePattern.value) {
+                SearchResultScreen(
                     navigateTo = navigateTo,
                     modifier = Modifier.fillMaxSize(),
                 )

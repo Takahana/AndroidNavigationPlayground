@@ -15,7 +15,7 @@ import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyApp
 import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination.Home.HomeRoutePattern
 import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination.Player.PlayerRoutePattern
 import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination.Purchase.PurchaseRoutePattern
-import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination.Search.SearchRoutePattern
+import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination.SearchTop.SearchTopRoutePattern
 import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination.Trend.TrendRoutePattern
 
 private const val MainNavGraph = "main_nav_graph"
@@ -33,7 +33,7 @@ fun NavController.createMainBottomNavGraph() {
         startDestination = Home.route
     ) {
         fragment<HomeFragment>(route = HomeRoutePattern())
-        fragment<SearchFragment>(route = SearchRoutePattern())
+        fragment<SearchFragment>(route = SearchTopRoutePattern())
         activity(route = PlayerRoutePattern()) {
             this.activityClass = PlayerActivity::class
         }

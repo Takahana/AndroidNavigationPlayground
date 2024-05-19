@@ -22,14 +22,23 @@ sealed interface MyAppScreenDestination : ScreenDestination {
         }
     }
 
-    data object Search : MyAppScreenDestination {
+    data object SearchTop : MyAppScreenDestination {
 
         override val route: String = "search"
 
         override val location = BottomNavigationItem
 
-        object SearchRoutePattern : RoutePattern {
+        object SearchTopRoutePattern : RoutePattern {
             override val value: String = "search"
+        }
+    }
+
+    data object SearchResult : MyAppScreenDestination {
+
+        override val route: String = "search/result"
+
+        object SearchResultRoutePattern : RoutePattern {
+            override val value: String = "search/result"
         }
     }
 

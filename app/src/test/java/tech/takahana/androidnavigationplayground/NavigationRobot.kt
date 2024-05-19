@@ -103,7 +103,7 @@ class NavigationRobot @Inject constructor(
     }
 
     fun verifySelectedBottomNavigationItemOfSearch() {
-        onView(withId(MyAppScreenDestination.Search.bottomNavMenuId())).check(matches(isSelected()))
+        onView(withId(MyAppScreenDestination.SearchTop.bottomNavMenuId())).check(matches(isSelected()))
     }
 
     fun navigateUp() {
@@ -152,7 +152,7 @@ class NavigationRobot @Inject constructor(
     private fun MyAppScreenDestination.bottomNavMenuId(): Int {
         return when (this) {
             MyAppScreenDestination.Home -> bottomNavMenuHomeId
-            MyAppScreenDestination.Search -> bottomNavMenuSearchId
+            MyAppScreenDestination.SearchTop -> bottomNavMenuSearchId
             else -> throw IllegalArgumentException("Failed mapping destination: $this to bottomNavMenuId")
         }
     }
