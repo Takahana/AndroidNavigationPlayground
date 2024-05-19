@@ -64,24 +64,18 @@ class PlayerActivity : AppCompatActivity() {
         ScreenNavigationMessageReceiver(
             activity = this,
             screenNavigator = screenNavigator,
-            requestTag = NAV_REQUEST_TAG,
         )
     }
 
     private fun navigateTo(destination: MyAppScreenDestination) {
         screenNavigator.navigate(
             destination,
-            NAV_REQUEST_TAG,
         )
     }
 
     override fun finish() {
         super.finish()
         ScreenNavigator.applyPopAnimationsToPendingTransition(this)
-    }
-
-    companion object {
-        private const val NAV_REQUEST_TAG = "NAV_REQUEST_TAG_ON_PLAYER_ACTIVITY"
     }
 }
 

@@ -47,7 +47,6 @@ class PurchaseFragment : Fragment() {
         ScreenNavigationMessageReceiver(
             activity = requireActivity(),
             screenNavigator = screenNavigator,
-            requestTag = NAV_REQUEST_TAG,
         )
         return ComposeView(requireContext()).apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
@@ -68,11 +67,7 @@ class PurchaseFragment : Fragment() {
     }
 
     private fun navigateTo(destination: MyAppScreenDestination) {
-        screenNavigator.navigate(destination, NAV_REQUEST_TAG)
-    }
-
-    companion object {
-        private const val NAV_REQUEST_TAG = "nav_request_tag_from_purchase"
+        screenNavigator.navigate(destination)
     }
 }
 

@@ -16,14 +16,13 @@ import tech.takahana.androidnavigationplayground.navigator.components.ScreenNavi
 class ScreenNavigationMessageReceiver(
     private val activity: FragmentActivity,
     private val screenNavigator: ScreenNavigator,
-    private val requestTag: String,
 ) {
 
     init {
         activity.lifecycleScope.launch {
             activity.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 screenNavigator.screenNavigationMessage.onEach { message ->
-                    onReceived(message, requestTag)
+                    onReceived(message, screenNavigator.requestTag)
                 }.launchIn(this)
             }
         }

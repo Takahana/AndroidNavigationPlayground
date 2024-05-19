@@ -34,6 +34,7 @@ class NavHostFragmentScreenNavigator(
 
     private var navigationRequestJob: Job? = null
     private var pendingRequest: ScreenNavigationRequest? = null
+    override val requestTag: String = ScreenNavigationRequestTagCreator.createTag()
 
     override val screenNavigationMessage: Flow<ScreenNavigationMessage> =
         navigationMessageDispatcher.screenNavigationMessage.filterNotNull()
@@ -62,11 +63,6 @@ class NavHostFragmentScreenNavigator(
                 .build(),
         )
     }
-
-    override fun navigate(
-        destination: ScreenDestination,
-        requestTag: String?,
-    ) = throw UnsupportedOperationException("requestTag is not supported.")
 
     override fun respondedTo(message: ScreenNavigationMessage) {
         navigationMessageDispatcher.responded(message)
