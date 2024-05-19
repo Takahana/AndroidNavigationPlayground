@@ -5,6 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.components.SingletonComponent
+import tech.takahana.androidnavigationplayground.navigator.components.ComposeScreenNavigator
 import tech.takahana.androidnavigationplayground.navigator.components.DefaultScreenNavigator
 import tech.takahana.androidnavigationplayground.navigator.components.NavHostFragmentScreenNavigator
 import tech.takahana.androidnavigationplayground.navigator.components.ScreenNavigationMessageDispatcher
@@ -49,6 +50,17 @@ class ScreenNavigatorModule {
         screenNavigationRequestDispatcher: ScreenNavigationRequestDispatcher,
     ): NavHostFragmentScreenNavigator.Factory {
         return NavHostFragmentScreenNavigator.Factory(
+            screenNavigationMessageDispatcher,
+            screenNavigationRequestDispatcher,
+        )
+    }
+
+    @Provides
+    fun provideComposeScreenNavigatorFactory(
+        screenNavigationMessageDispatcher: ScreenNavigationMessageDispatcher,
+        screenNavigationRequestDispatcher: ScreenNavigationRequestDispatcher,
+    ): ComposeScreenNavigator.Factory {
+        return ComposeScreenNavigator.Factory(
             screenNavigationMessageDispatcher,
             screenNavigationRequestDispatcher,
         )

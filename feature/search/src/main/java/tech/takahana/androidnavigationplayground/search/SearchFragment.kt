@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,9 +15,23 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import dagger.hilt.android.AndroidEntryPoint
+import tech.takahana.androidnavigationplayground.navigator.components.ComposeScreenNavigator
+import tech.takahana.androidnavigationplayground.navigator.components.NavHostFragmentScreenNavigator
+import tech.takahana.androidnavigationplayground.navigator.components.ScreenNavigator
+import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination
 import tech.takahana.androidnavigationplayground.uicomponent.ui.theme.AndroidNavigationPlaygroundTheme
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class SearchFragment : Fragment() {
+
+    @Inject
+    lateinit var composeScreenNavigatorFactory: ComposeScreenNavigator.Factory
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,7 +47,12 @@ class SearchFragment : Fragment() {
                         modifier = Modifier.fillMaxSize(),
                         color = MaterialTheme.colorScheme.background
                     ) {
-                        SearchDisplay()
+                        val navController: NavHostController = rememberNavController()
+                        val screenNavigator = composeScreenNavigatorFactory.create(navController)
+                        SearchDisplay(
+                            navController = navController,
+                            navigateTo = screenNavigator::navigate,
+                        )
                     }
                 }
             }
@@ -43,11 +61,25 @@ class SearchFragment : Fragment() {
 }
 
 @Composable
-internal fun SearchDisplay() {
+internal fun SearchDisplay(
+    navController: NavHostController,
+    navigateTo: (MyAppScreenDestination) -> Unit,
+) {
     Box(
         contentAlignment = Alignment.Center,
     ) {
-        Text(text = SearchFragment::class.java.simpleName)
+        NavHost(
+            navController = navController,
+            startDestination = MyAppScreenDestination.Search.SearchRoutePattern.value,
+        ) {
+            composable(MyAppScreenDestination.Search.SearchRoutePattern.value) {
+                SearchTopScreen(
+                    navigateTo = navigateTo,
+                    modifier = Modifier.fillMaxSize(),
+                )
+            }
+        }
+
     }
 }
 
@@ -60,7 +92,10 @@ internal fun SearchScreenPreview() {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            SearchDisplay()
+            SearchDisplay(
+                navController = rememberNavController(),
+                navigateTo = {}
+            )
         }
     }
 }
