@@ -28,6 +28,7 @@ import tech.takahana.androidnavigationplayground.navigator.components.ScreenNavi
 import tech.takahana.androidnavigationplayground.navigator.components.applyPopAnimationsToPendingTransition
 import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination
 import tech.takahana.androidnavigationplayground.uicomponent.ui.theme.AndroidNavigationPlaygroundTheme
+import tech.takahana.androidnavigationplayground.uicomponent.uimodel.id.PlayerIdUiModel
 import tech.takahana.androidnavigationplayground.uicomponent.uimodel.id.TrendIdUiModel
 import javax.inject.Inject
 
@@ -36,6 +37,12 @@ class PlayerActivity : AppCompatActivity() {
 
     @Inject
     lateinit var screenNavigator: ScreenNavigator
+
+    private val playerId: PlayerIdUiModel by lazy {
+        val playerId =
+            requireNotNull(intent.extras?.getString(MyAppScreenDestination.Player.Key.PLAYER_ID))
+        PlayerIdUiModel(playerId)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +54,7 @@ class PlayerActivity : AppCompatActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     PlayerScreen(
+                        playerId = playerId,
                         onClick = { navigateTo(it) }
                     )
                 }
@@ -80,13 +88,14 @@ class PlayerActivity : AppCompatActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun PlayerScreen(
+    playerId: PlayerIdUiModel,
     onClick: (MyAppScreenDestination) -> Unit,
 ) {
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
-                    Text("${PlayerActivity::class.simpleName}")
+                    Text("${PlayerActivity::class.simpleName}: ${playerId.value}")
                 }
             )
         },
@@ -112,10 +121,14 @@ internal fun PlayerContents(
         item {
             PlayerContent(
                 content = {
-                    Text(text = "Open Player")
+                    Text(text = "Open Player 2")
                 },
                 onClick = {
-                    onClick(MyAppScreenDestination.Player)
+                    onClick(
+                        MyAppScreenDestination.Player(
+                            playerId = PlayerIdUiModel("player2")
+                        )
+                    )
                 },
                 modifier = itemModifier,
             )
@@ -171,6 +184,7 @@ internal fun PlayerScreenPreview()  {
             color = MaterialTheme.colorScheme.background
         ) {
             PlayerScreen(
+                playerId = PlayerIdUiModel("player1"),
                 onClick = { }
             )
         }

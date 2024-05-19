@@ -28,6 +28,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import tech.takahana.androidnavigationplayground.navigator.components.ScreenNavigator
 import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination
 import tech.takahana.androidnavigationplayground.uicomponent.ui.theme.AndroidNavigationPlaygroundTheme
+import tech.takahana.androidnavigationplayground.uicomponent.uimodel.id.PlayerIdUiModel
 import tech.takahana.androidnavigationplayground.uicomponent.uimodel.id.TrendIdUiModel
 import javax.inject.Inject
 
@@ -95,10 +96,12 @@ internal fun PurchaseContents(
         item {
             PurchaseContent(
                 content = {
-                    Text(text = "Open Player")
+                    Text(text = "Open Player 3")
                 },
                 onClick = {
-                    onClick(MyAppScreenDestination.Player)
+                    onClick(MyAppScreenDestination.Player(
+                        PlayerIdUiModel("player3")
+                    ))
                 },
                 modifier = itemModifier,
             )

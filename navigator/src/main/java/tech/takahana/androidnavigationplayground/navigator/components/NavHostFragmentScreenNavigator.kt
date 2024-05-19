@@ -123,6 +123,7 @@ class NavHostFragmentScreenNavigator(
                             message = ShouldOpenDialogFragmentOnScreenSentRequest(
                                 dialogFragment = dialogFragment,
                                 tag = request.requestTag,
+                                args = request.destination.getArgs(),
                             ),
                         )
                     )
@@ -141,6 +142,7 @@ class NavHostFragmentScreenNavigator(
                                 exitAnim = request.destination.transition?.exitAnim,
                                 popEnterAnim = request.destination.transition?.popEnterAnim,
                                 popExitAnim = request.destination.transition?.popExitAnim,
+                                args = request.destination.getArgs(),
                             ),
                         )
                     )

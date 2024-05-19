@@ -37,7 +37,9 @@ class ScreenNavigationMessageReceiver(
         if (message.tag != requestTag) return
         when (message.message) {
             is ScreenNavigationMessage.Message.ShouldOpenDialogFragmentOnScreenSentRequest -> {
-                val dialogFragment = message.message.dialogFragment
+                val dialogFragment = message.message.dialogFragment.apply {
+                    arguments = message.message.args
+                }
                 dialogFragment.show(
                     activity.supportFragmentManager,
                     message.message.tag,
@@ -53,6 +55,7 @@ class ScreenNavigationMessageReceiver(
                             KEY_POP_EXIT_ANIM to message.message.popExitAnim,
                         )
                     )
+                    putExtras(message.message.args)
                 }
                 activity.startActivity(intent)
 

@@ -1,5 +1,7 @@
 package tech.takahana.androidnavigationplayground.navigator.components
 
+import android.os.Bundle
+
 interface ScreenDestination {
 
     val route: String
@@ -9,4 +11,6 @@ interface ScreenDestination {
 
     val transition: ScreenTransition?
         get() = null
+
+    fun getArgs(): Bundle = Bundle()
 }
