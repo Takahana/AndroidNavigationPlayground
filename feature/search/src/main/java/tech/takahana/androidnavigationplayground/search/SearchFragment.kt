@@ -34,7 +34,7 @@ class SearchFragment : Fragment() {
                         modifier = Modifier.fillMaxSize(),
                         color = MaterialTheme.colorScheme.background
                     ) {
-                        SearchScreen()
+                        SearchDisplay()
                     }
                 }
             }
@@ -43,7 +43,7 @@ class SearchFragment : Fragment() {
 }
 
 @Composable
-internal fun SearchScreen() {
+internal fun SearchDisplay() {
     Box(
         contentAlignment = Alignment.Center,
     ) {
@@ -60,7 +60,7 @@ internal fun SearchScreenPreview() {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            SearchScreen()
+            SearchDisplay()
         }
     }
 }
