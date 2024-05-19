@@ -13,6 +13,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
@@ -22,7 +23,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import tech.takahana.androidnavigationplayground.navigator.components.ComposeScreenNavigator
 import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination
 import tech.takahana.androidnavigationplayground.uicomponent.ui.theme.AndroidNavigationPlaygroundTheme
@@ -33,6 +36,9 @@ class SearchFragment : Fragment() {
 
     @Inject
     lateinit var composeScreenNavigatorFactory: ComposeScreenNavigator.Factory
+
+    private val initialQuery: String?
+        get() = arguments?.getString(MyAppScreenDestination.SearchResult.Key.QUERY)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,6 +59,17 @@ class SearchFragment : Fragment() {
                         SearchDisplay(
                             navController = navController,
                             navigateTo = screenNavigator::navigate,
+                            onGraphCreated = {
+                                if (savedInstanceState == null) {
+                                    initialQuery?.let {
+                                        screenNavigator.navigate(
+                                            MyAppScreenDestination.SearchResult(
+                                                it
+                                            )
+                                        )
+                                    }
+                                }
+                            }
                         )
                     }
                 }
@@ -66,6 +83,7 @@ class SearchFragment : Fragment() {
 internal fun SearchDisplay(
     navController: NavHostController,
     navigateTo: (MyAppScreenDestination) -> Unit,
+    onGraphCreated: () -> Unit = {},
 ) {
     Scaffold(
         topBar = {
@@ -85,14 +103,26 @@ internal fun SearchDisplay(
                     modifier = Modifier.fillMaxSize(),
                 )
             }
-            composable(MyAppScreenDestination.SearchResult.SearchResultRoutePattern.value) {
+            composable(
+                MyAppScreenDestination.SearchResult.SearchResultRoutePattern.value,
+                arguments = listOf(navArgument(MyAppScreenDestination.SearchResult.Key.QUERY) {
+                    defaultValue = ""
+                })
+            ) {
+                val query =
+                    it.arguments?.getString(MyAppScreenDestination.SearchResult.Key.QUERY).orEmpty()
                 SearchResultScreen(
+                    query = query,
                     navigateTo = navigateTo,
                     modifier = Modifier.fillMaxSize(),
                 )
             }
         }
 
+        LaunchedEffect(navController) {
+            delay(300)
+            onGraphCreated()
+        }
     }
 }
 

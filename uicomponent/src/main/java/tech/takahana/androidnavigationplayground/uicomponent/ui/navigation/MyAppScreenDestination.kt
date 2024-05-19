@@ -33,12 +33,23 @@ sealed interface MyAppScreenDestination : ScreenDestination {
         }
     }
 
-    data object SearchResult : MyAppScreenDestination {
+    data class SearchResult(
+        val query: String,
+    ) : MyAppScreenDestination {
 
-        override val route: String = "search/result"
+        override val route: String = "search/result?${Key.QUERY}=$query"
+
+        override fun getArgs(): Bundle = bundleOf(
+            Key.QUERY to query
+        )
+
+        object Key {
+            const val QUERY = "query"
+        }
+
 
         object SearchResultRoutePattern : RoutePattern {
-            override val value: String = "search/result"
+            override val value: String = "search/result?${Key.QUERY}={${Key.QUERY}}"
         }
     }
 

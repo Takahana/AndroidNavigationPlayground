@@ -152,6 +152,17 @@ internal fun HomeContents(
                 modifier = itemModifier,
             )
         }
+        item {
+            HomeContent(
+                content = {
+                    Text(text = "Open Search Result")
+                },
+                onClick = {
+                    onClick(MyAppScreenDestination.SearchResult("from home"))
+                },
+                modifier = itemModifier,
+            )
+        }
     }
 }
 

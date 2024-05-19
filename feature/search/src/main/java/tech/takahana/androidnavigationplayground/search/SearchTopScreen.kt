@@ -91,7 +91,7 @@ internal fun SearchTopContents(
                     Text(text = "Open Search Result")
                 },
                 onClick = {
-                    onClick(MyAppScreenDestination.SearchResult)
+                    onClick(MyAppScreenDestination.SearchResult("from search top"))
                 },
                 modifier = itemModifier,
             )

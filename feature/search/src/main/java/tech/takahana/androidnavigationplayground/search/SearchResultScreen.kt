@@ -24,6 +24,7 @@ import tech.takahana.androidnavigationplayground.uicomponent.uimodel.id.TrendIdU
 
 @Composable
 fun SearchResultScreen(
+    query: String,
     navigateTo: (MyAppScreenDestination) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -32,6 +33,7 @@ fun SearchResultScreen(
         contentAlignment = Alignment.Center,
     ) {
         SearchResultContents(
+            query = query,
             onClick = navigateTo,
             modifier = Modifier.fillMaxSize(),
         )
@@ -40,6 +42,7 @@ fun SearchResultScreen(
 
 @Composable
 internal fun SearchResultContents(
+    query: String,
     onClick: (MyAppScreenDestination) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -48,6 +51,8 @@ internal fun SearchResultContents(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
+        item { Text(text = "Search result for: $query") }
+
         val itemModifier = Modifier.fillMaxWidth()
         item {
             SearchResultContent(
@@ -115,6 +120,7 @@ fun SearchResultScreenPreview() {
             color = MaterialTheme.colorScheme.background
         ) {
             SearchResultScreen(
+                query = "search query",
                 navigateTo = {},
                 modifier = Modifier.fillMaxSize(),
             )
