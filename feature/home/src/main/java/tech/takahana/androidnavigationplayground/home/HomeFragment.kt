@@ -13,9 +13,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,6 +27,7 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavHostController
 import dagger.hilt.android.AndroidEntryPoint
 import tech.takahana.androidnavigationplayground.navigator.components.ScreenNavigator
 import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination
@@ -52,7 +56,7 @@ class HomeFragment : Fragment() {
                         modifier = Modifier.fillMaxSize(),
                         color = MaterialTheme.colorScheme.background
                     ) {
-                        HomeScreen(
+                        HomeDisplay(
                             onClick = { navigateTo(it) }
                         )
                     }
@@ -63,6 +67,26 @@ class HomeFragment : Fragment() {
 
     private fun navigateTo(destination: MyAppScreenDestination) {
         screenNavigator.navigate(destination)
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+internal fun HomeDisplay(
+    onClick: (MyAppScreenDestination) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Home") }
+            )
+        }
+    ) {
+        HomeScreen(
+            onClick = onClick,
+            modifier = modifier.padding(it),
+        )
     }
 }
 

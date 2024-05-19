@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
@@ -21,8 +24,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import tech.takahana.androidnavigationplayground.navigator.components.ComposeScreenNavigator
-import tech.takahana.androidnavigationplayground.navigator.components.NavHostFragmentScreenNavigator
-import tech.takahana.androidnavigationplayground.navigator.components.ScreenNavigator
 import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination
 import tech.takahana.androidnavigationplayground.uicomponent.ui.theme.AndroidNavigationPlaygroundTheme
 import javax.inject.Inject
@@ -60,15 +61,21 @@ class SearchFragment : Fragment() {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun SearchDisplay(
     navController: NavHostController,
     navigateTo: (MyAppScreenDestination) -> Unit,
 ) {
-    Box(
-        contentAlignment = Alignment.Center,
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Search") }
+            )
+        }
     ) {
         NavHost(
+            modifier = Modifier.padding(it),
             navController = navController,
             startDestination = MyAppScreenDestination.Search.SearchRoutePattern.value,
         ) {
