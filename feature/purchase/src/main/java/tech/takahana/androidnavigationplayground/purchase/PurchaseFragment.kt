@@ -25,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import dagger.hilt.android.AndroidEntryPoint
+import tech.takahana.androidnavigationplayground.navigator.components.ScreenNavigationMessageReceiver
 import tech.takahana.androidnavigationplayground.navigator.components.ScreenNavigator
 import tech.takahana.androidnavigationplayground.uicomponent.ui.navigation.MyAppScreenDestination
 import tech.takahana.androidnavigationplayground.uicomponent.ui.theme.AndroidNavigationPlaygroundTheme
@@ -43,6 +44,11 @@ class PurchaseFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        ScreenNavigationMessageReceiver(
+            activity = requireActivity(),
+            screenNavigator = screenNavigator,
+            requestTag = NAV_REQUEST_TAG,
+        )
         return ComposeView(requireContext()).apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
@@ -62,7 +68,11 @@ class PurchaseFragment : Fragment() {
     }
 
     private fun navigateTo(destination: MyAppScreenDestination) {
-        screenNavigator.navigate(destination)
+        screenNavigator.navigate(destination, NAV_REQUEST_TAG)
+    }
+
+    companion object {
+        private const val NAV_REQUEST_TAG = "nav_request_tag_from_purchase"
     }
 }
 
